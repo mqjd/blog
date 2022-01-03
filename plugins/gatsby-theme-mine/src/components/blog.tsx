@@ -30,7 +30,7 @@ const Blog = ({ posts }: PostsProps) => {
     <Layout>
       <Seo title="Blog" />
       <Flex sx={{ alignItems: `center`, justifyContent: `space-between`, flexFlow: `wrap` }}>
-        <Heading as="h1" variant="styles.h1" sx={{ marginY: 2 }}>
+        <Heading as="h1" variant="styles.h1" sx={{ marginY: 2, fontSize: [3, 6] }} >
           Blog
         </Heading>
         <TLink

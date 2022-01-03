@@ -1,6 +1,6 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
-import { ThemeProvider, merge } from 'theme-ui'
+import { ThemeProvider, merge, useColorMode } from 'theme-ui'
 import split from './split-slides'
 import { Context } from './context'
 import Keyboard from './keyboard'
@@ -9,6 +9,7 @@ import Storage from './storage'
 import Container from './container'
 import Slide from './slide'
 import baseTheme from './theme'
+import { tailwind } from "@theme-ui/presets"
 
 const getIndex = props => {
   if (!props.location) return 0
@@ -16,7 +17,21 @@ const getIndex = props => {
   return n
 }
 
+const wrapperTheme = (mode) => {
+  if (mode === 'dark') {
+    return {
+      colors: {
+        text: tailwind.colors.gray[4],
+        background: `#1A202C`,
+      },
+    }
+  }
+
+  return {};
+}
+
 const Deck = props => {
+  const [colorMode] = useColorMode()
   const slides = split(props)
   const [index, setIndex] = React.useState(getIndex(props))
   const { slug } = props.pageContext || {}
@@ -96,7 +111,7 @@ const Deck = props => {
     }
   }
 
-  const theme = merge(baseTheme, props.theme || {})
+  const theme = merge(baseTheme, props.theme || wrapperTheme(colorMode))
 
   return (
     <Context.Provider value={context}>

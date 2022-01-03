@@ -19,7 +19,7 @@ type PageProps = {
 const Page = ({ data: { page } }: PageProps) => (
   <Layout>
     <Seo title={page.title} description={page.excerpt} />
-    <Heading as="h1" variant="styles.h1">
+    <Heading as="h1" variant="styles.h1" sx={{ marginY: 2, fontSize: [3, 6] }}>
       {page.title}
     </Heading>
     <section sx={{ my: 5, variant: `layout.content` }}>
