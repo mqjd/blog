@@ -11,7 +11,7 @@ module.exports = themeOptions => {
       siteUrl: `https://github.com/mqjd`,
       siteDescription: `QiangMa's Blog`,
       siteLanguage: `en`,
-      siteImage: `/banner.jpg`,
+      siteImage: `/banner.png`,
       author: `QiangMa`,
     },
     plugins: [
