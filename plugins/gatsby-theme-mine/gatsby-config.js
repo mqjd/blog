@@ -16,12 +16,6 @@ module.exports = themeOptions => {
     },
     plugins: [
       {
-        resolve: "gatsby-plugin-load-script",
-        options: {
-          src: "/lib/viewer.min.js",
-        },
-      },
-      {
         resolve: `gatsby-source-filesystem`,
         options: {
           name: options.postsPath,
@@ -56,6 +50,7 @@ module.exports = themeOptions => {
             {
               resolve: `gatsby-remark-drawio`,
               options: {
+                src: "/lib/viewer.min.js",
                 highlight: "#00afff",
                 lightbox: false,
                 nav: true,
