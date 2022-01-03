@@ -16,10 +16,9 @@ const style = {
 }
 
 const DrawioViewer = ( prop: Props) => {
-    console.log(prop)
-    let win: any = window;
     const container = React.useRef()
     React.useEffect(() => {
+        let win: any = window;
         const element = container.current
         win.GraphViewer.getUrl(prop.url, function (e) {
             e = win.mxUtils.parseXml(e);
