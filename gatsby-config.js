@@ -4,23 +4,22 @@ const shouldAnalyseBundle = process.env.ANALYSE_BUNDLE
 
 module.exports = {
   siteMetadata: {
-    // You can overwrite values here that are used for the SEO component
-    // You can also add new values here to query them like usual
-    // See all options: https://github.com/LekoArts/gatsby-themes/blob/main/themes/gatsby-theme-minimal-blog/gatsby-config.js
-    siteTitle: `Minimal Blog`,
-    siteTitleAlt: `Minimal Blog - Gatsby Theme`,
-    siteHeadline: `Minimal Blog - Gatsby Theme from @lekoarts`,
-    siteUrl: `https://minimal-blog.lekoarts.de`,
-    siteDescription: `Typography driven, feature-rich blogging theme with minimal aesthetics. Includes tags/categories support and extensive features for code blocks such as live preview, line numbers, and line highlighting.`,
+    siteTitle: `QiangMa's Blog`,
+    siteTitleAlt: `QiangMa's Blog`,
+    siteHeadline: `QiangMa's Blog`,
+    siteUrl: `https://github.com/mqjd`,
+    siteDescription: `QiangMa's Blog`,
     siteLanguage: `en`,
     siteImage: `/banner.jpg`,
-    author: `@lekoarts_de`,
+    author: `QiangMa`,
   },
   plugins: [
     {
-      resolve: `@lekoarts/gatsby-theme-minimal-blog`,
+      resolve: `gatsby-theme-mine`,
       // See the theme's README for all available options
       options: {
+        postsPath:`${__dirname}/docs/posts`,
+        pagesPath:`${__dirname}/docs/pages`,
         navigation: [
           {
             title: `Blog`,
@@ -33,12 +32,8 @@ module.exports = {
         ],
         externalLinks: [
           {
-            name: `Twitter`,
-            url: `https://twitter.com/lekoarts_de`,
-          },
-          {
-            name: `Homepage`,
-            url: `https://www.lekoarts.de?utm_source=minimal-blog&utm_medium=Starter`,
+            name: `Github`,
+            url: `https://github.com/mqjd`,
           },
         ],
       },
@@ -50,8 +45,6 @@ module.exports = {
         preconnect: [`https://fonts.gstatic.com`],
         interval: 300,
         timeout: 30000,
-        // If you plan on changing the font you'll also need to adjust the Theme UI config to edit the CSS
-        // See: https://github.com/LekoArts/gatsby-themes/tree/main/examples/minimal-blog#changing-your-fonts
         web: [
           {
             name: `IBM Plex Sans`,
@@ -64,7 +57,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `minimal-blog - @lekoarts/gatsby-theme-minimal-blog`,
+        name: `minimal-blog - gatsby-theme-mine`,
         short_name: `minimal-blog`,
         description: `Typography driven, feature-rich blogging theme with minimal aesthetics. Includes tags/categories support and extensive features for code blocks such as live preview, line numbers, and code highlighting.`,
         start_url: `/`,
@@ -105,7 +98,7 @@ module.exports = {
         feeds: [
           {
             serialize: ({ query: { site, allPost } }) =>
-              allPost.nodes.map((post) => {
+              allPost.nodes.map(post => {
                 const url = site.siteMetadata.siteUrl + post.slug
                 const content = `<p>${post.excerpt}</p><div style="margin-top: 50px; font-style: italic;"><strong><a href="${url}">Keep reading</a>.</strong></div><br /> <br />`
 
@@ -131,7 +124,7 @@ module.exports = {
               }
             `,
             output: `rss.xml`,
-            title: `Minimal Blog - @lekoarts/gatsby-theme-minimal-blog`,
+            title: `Minimal Blog - gatsby-theme-mine`,
           },
         ],
       },

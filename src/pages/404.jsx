@@ -1,5 +1,5 @@
 import * as React from "react"
-import Layout from "@lekoarts/gatsby-theme-minimal-blog/src/components/layout"
+import Layout from "../../plugins/gatsby-theme-mine/src/components/layout"
 
 const NotFound = () => (
   <Layout>
