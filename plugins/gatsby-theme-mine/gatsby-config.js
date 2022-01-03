@@ -62,7 +62,7 @@ module.exports = themeOptions => {
                 resize: true,
                 toolbar: "pages zoom layers lightbox",
                 baseUrl:
-                  "https://cdn.jsdelivr.net/gh/mqjd/assets/",
+                  "https://cdn.jsdelivr.net/gh/mqjd/assets@latest/",
               },
             },
             `gatsby-remark-import-code`,

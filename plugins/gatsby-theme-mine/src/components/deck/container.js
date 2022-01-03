@@ -48,7 +48,6 @@ const Main = ({
 
 const Presenter = props => {
   const next = props.slides[props.index + 1]
-
   return (
     <div
       sx={{
@@ -130,12 +129,12 @@ const Presenter = props => {
 
 const Overview = props => {
   const ref = React.useRef(null)
-
+  const keydown = () => {};
   React.useEffect(() => {
     if (!ref.current) return
     if (typeof ref.current.scrollIntoViewIfNeeded !== 'function') return
     ref.current.scrollIntoViewIfNeeded()
-  }, [ref.current])
+  }, [])
 
   return (
     <div
@@ -155,6 +154,7 @@ const Overview = props => {
         {props.slides.map((slide, i) => (
           <div
             key={i}
+            tabIndex={i}
             ref={i === props.index ? ref : null}
             role='button'
             title={`Go to slide ${i}`}
@@ -163,6 +163,7 @@ const Overview = props => {
               props.setStep(0)
               props.setSteps(0)
             }}
+            onKeyDown={keydown}
             sx={{
               p: 2,
               height: '30%'
@@ -199,12 +200,12 @@ const Overview = props => {
 
 const Grid = props => {
   const ref = React.useRef(null)
-
+  const keydown = () => {};
   React.useEffect(() => {
     if (!ref.current) return
     if (typeof ref.current.scrollIntoViewIfNeeded !== 'function') return
     ref.current.scrollIntoViewIfNeeded()
-  }, [ref.current])
+  }, [])
 
   return (
     <div
@@ -222,6 +223,7 @@ const Grid = props => {
         {props.slides.map((slide, i) => (
           <div
             key={i}
+            tabIndex={i}
             ref={i === props.index ? ref : null}
             role='button'
             title={`Go to slide ${i}`}
@@ -231,6 +233,7 @@ const Grid = props => {
               props.setSteps(0)
               props.setMode(modes.default)
             }}
+            onKeyDown={keydown}
             sx={{
               p: 2,
               width: '25%',

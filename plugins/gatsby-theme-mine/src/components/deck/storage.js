@@ -41,7 +41,7 @@ export const useStorage = () => {
       window.removeEventListener("focus", handleFocus)
       window.removeEventListener("blur", handleBlur)
     }
-  }, [focused])
+  }, [focused]) // eslint-disable-line react-hooks/exhaustive-deps
 
   // store changes
   React.useEffect(() => {
