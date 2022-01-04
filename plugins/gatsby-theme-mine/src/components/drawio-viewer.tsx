@@ -22,6 +22,12 @@ const DrawioViewer = ( prop: Props) => {
     const defaultProps = {
         toolbar: context.deck ? null : prop.toolbar || null,
         "auto-fit": true,
+        "auto-origin": true,
+        "allow-zoom-in": false,
+        "allow-zoom-out": false,
+        "toolbar-position": "top",
+        center: true,
+        responsive: true,
     }
     React.useEffect(() => {
         let win: any = window;
