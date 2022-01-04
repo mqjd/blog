@@ -48,27 +48,6 @@ const Deck = props => {
   const lastIndex = React.useRef(0)
   const direction = index - lastIndex.current
 
-  React.useEffect(() => {
-    lastIndex.current = index
-  }, [index])
-
-  // React.useEffect(() => {
-  //   if (props.location.pathname === '/print') return
-  //   props.navigate('/#' + index, {
-  //     replace: true,
-  //   })
-  // }, [index])
-
-  // React.useEffect(() => {
-  //   if (props.location.pathname === '/print') {
-  //     setMode(modes.print)
-  //   }
-  //   if (!slide) {
-  //     props.navigate('/')
-  //     setIndex(0)
-  //   }
-  // }, [])
-
   if (!slide) return false
 
   const context = {
@@ -89,6 +68,7 @@ const Deck = props => {
     setStep,
     steps,
     setSteps,
+    deck: true
   }
 
   context.previous = () => {
