@@ -38,8 +38,9 @@ module.exports = themeOptions => {
           extensions: [`.mdx`, `.md`],
           remarkPlugins,
           gatsbyRemarkPlugins: [
+            `gatsby-remark-import-code`,
             {
-              resolve: `gatsby-remark-images`,
+              resolve: `gatsby-remark-imgs`,
               options: {
                 maxWidth: 960,
                 quality: 90,
@@ -59,8 +60,7 @@ module.exports = themeOptions => {
                 baseUrl:
                   "https://cdn.jsdelivr.net/gh/mqjd/assets@latest/",
               },
-            },
-            `gatsby-remark-import-code`,
+            }
           ],
         },
       },

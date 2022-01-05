@@ -39,7 +39,6 @@
       "react-helmet": "^6.1.0",
       "react-live": "^2.3.0",
       "theme-ui": "^0.11.1",
-
       "@mdx-deck/themes": "^4.1.0",
       "@reach/router": "^1.2.1",
       "gatsby-plugin-compile-es6-packages": "^2.0.0",

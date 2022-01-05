@@ -1,5 +1,5 @@
 import React from 'react'
-import { useDeck } from './deck/context'
+import { useDeck } from 'mdx-deck'
 
 type Props = {
     highlight: string,

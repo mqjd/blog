@@ -2,7 +2,7 @@ import React from "react"
 import { MDXProvider } from '@mdx-js/react'
 import { MDXRenderer } from "gatsby-plugin-mdx"
 
-import wrapper from "../components/deck/deck"
+import wrapper from "@mdx-deck/gatsby-plugin/src/deck"
 import * as mdxComponents from "../components/deck/components"
 
 const components = {
