@@ -2,15 +2,16 @@
 import { jsx } from "theme-ui"
 import React from 'react'
 import { Helmet } from 'react-helmet'
-import { ThemeProvider, merge } from 'theme-ui'
+import { ThemeProvider, merge, useColorMode } from 'theme-ui'
 import split from '@mdx-deck/gatsby-plugin/src/split-slides'
 import { Context } from '@mdx-deck/gatsby-plugin/src/context'
 import Keyboard from './keyboard'
 import modes from '@mdx-deck/gatsby-plugin/src/modes'
 import Storage from '@mdx-deck/gatsby-plugin/src/storage'
 import Container from './deck-container'
-import Slide from '@mdx-deck/gatsby-plugin/src/slide'
-import baseTheme from '@mdx-deck/gatsby-plugin/src/theme'
+import Slide from './slide'
+import baseTheme from './theme'
+import { tailwind } from "@theme-ui/presets"
 
 const getIndex = props => {
   if (!props.location) return 0
@@ -18,7 +19,21 @@ const getIndex = props => {
   return n
 }
 
+const wrapperTheme = (mode) => {
+  if (mode === 'dark') {
+    return {
+      colors: {
+        text: tailwind.colors.gray[4],
+        background: `#1A202C`,
+      },
+    }
+  }
+
+  return {};
+}
+
 const Deck = props => {
+  const [colorMode] = useColorMode()
   const slides = split(props)
   const [index, setIndex] = React.useState(getIndex(props))
   const { slug } = props.pageContext || {}
@@ -128,7 +143,7 @@ const Deck = props => {
     setMaximize(maximize.position === "fixed" ? deckStyle.inline : deckStyle.maximize);
   }
 
-  const theme = merge(baseTheme, props.theme || {})
+  const theme = merge(baseTheme, props.theme || wrapperTheme(colorMode))
 
   return (
     <Context.Provider value={context}>
