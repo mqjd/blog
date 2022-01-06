@@ -40,40 +40,42 @@ const MyParagraph = props => (
   <p style={{ fontSize: "18px", lineHeight: 1.6 }} {...props} />
 )
 
-const Post = ({ data: { post } }: PostProps) => (
-  <Layout>
-    <Seo
-      title={post.title}
-      description={post.description ? post.description : post.excerpt}
-      image={post.banner ? post.banner?.childImageSharp?.resize?.src : undefined}
-      pathname={post.slug}
-      canonicalUrl={post.canonicalUrl}
-    />
-    <Heading as="h1" variant="styles.h1">
-      {post.title}
-    </Heading>
-    <p sx={{ color: `secondary`, mt: 3, a: { color: `secondary` }, fontSize: [1, 1, 2] }}>
-      <time>{post.date}</time>
-      {post.tags && (
-        <React.Fragment>
-          {` — `}
-          <ItemTags tags={post.tags} />
-        </React.Fragment>
-      )}
-      {post.timeToRead && ` — `}
-      {post.timeToRead && <span>{post.timeToRead} min read</span>}
-    </p>
-    <section
-      sx={{
-        my: 5,
-        ".gatsby-resp-image-wrapper": { my: [4, 4, 5], boxShadow: shadow.join(`, `) },
-        variant: `layout.content`,
-      }}
-    >
-      <MDXRenderer>{post.body}</MDXRenderer>
-    </section>
-    <PostFooter post={post} />
-  </Layout>
-)
-
+const Post = (context: any) => {
+  const { data: { post } }: PostProps = context
+  return (
+      <Layout>
+        <Seo
+          title={post.title}
+          description={post.description ? post.description : post.excerpt}
+          image={post.banner ? post.banner?.childImageSharp?.resize?.src : undefined}
+          pathname={post.slug}
+          canonicalUrl={post.canonicalUrl}
+        />
+        <Heading as="h1" variant="styles.h1">
+          {post.title}
+        </Heading>
+        <p sx={{ color: `secondary`, mt: 3, a: { color: `secondary` }, fontSize: [1, 1, 2] }}>
+          <time>{post.date}</time>
+          {post.tags && (
+            <React.Fragment>
+              {` — `}
+              <ItemTags tags={post.tags} />
+            </React.Fragment>
+          )}
+          {post.timeToRead && ` — `}
+          {post.timeToRead && <span>{post.timeToRead} min read</span>}
+        </p>
+        <section
+          sx={{
+            my: 5,
+            ".gatsby-resp-image-wrapper": { my: [4, 4, 5], boxShadow: shadow.join(`, `) },
+            variant: `layout.content`,
+          }}
+        >
+          <MDXRenderer {...context}>{post.body}</MDXRenderer>
+        </section>
+        <PostFooter post={post} />
+      </Layout>
+    )
+}
 export default Post

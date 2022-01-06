@@ -1,5 +1,6 @@
 import React from 'react'
-import { useDeck } from 'mdx-deck'
+import { useDeck } from '@mdx-deck/gatsby-plugin/src/context'
+import { useSteps } from '@mdx-deck/gatsby-plugin/src/use-steps'
 
 type Props = {
     highlight: string,
@@ -49,27 +50,37 @@ const resoveValue = (value: any) => {
     return value;
 }
 
+const isDeckMode = (context: any) => {
+    return context.slug !== undefined;
+}
+
 const style = {
     minWidth: "100px",
     overflow: "hidden"
 }
 
 const DrawioViewer = ( prop: Props) => {
-    let graphView;
-    const container = React.useRef()
-    const context: any = useDeck()
+    const [graphView, setGraphView] = React.useState<any>();
+    const inDeck = isDeckMode(useDeck());
     const defaultProps = {
-        toolbar: context.deck ? null : prop.toolbar || null,
+        toolbar: inDeck ? null : prop.toolbar || null,
         "auto-fit": true
     }
-    let params = resolveParams(prop.param);
+    let params: any = resolveParams(prop.param);
+    if (params.steps) {
+        const step = useSteps(params.steps - 1)
+        React.useEffect(() => {
+            graphView && step !== graphView.currentPage && graphView.selectPage(step)
+        }, [step, graphView])
+    }
+    const container = React.useRef()
     React.useEffect(() => {
         let win: any = window;
         const element = container.current
         win.GraphViewer.getUrl(prop.url, function (e) {
-            graphView = new win.GraphViewer(element, win.mxUtils.parseXml(e).documentElement, {...prop, ...defaultProps, ...params});
+            setGraphView(new win.GraphViewer(element, win.mxUtils.parseXml(e).documentElement, {...prop, ...defaultProps, ...params}));
         });
-    }, [])
+    }, [prop.url])
     return <div style={style}><div style={{height: "100%"}} ref={container}></div></div>
 }
 

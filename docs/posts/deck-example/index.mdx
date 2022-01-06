@@ -1,0 +1,167 @@
+---
+title: "Deck Example"
+date: 2022-01-05 20:04:44
+slug: "/deck-example"
+deck: true
+tags:
+  - Deck
+---
+
+import { CodeSurfer } from "code-surfer"
+import Counter from './Counter'
+
+<Head>
+  <title>MDX Deck</title>
+  <meta name='twitter:card' content='summary_large_image' />
+  <meta name='twitter:site' content='@jxnblk' />
+  <meta name='twitter:title' content='mdx-deck' />
+  <meta name='twitter:description' content='MDX-based presentation decks' />
+  <meta name='twitter:image' content='https://jxnblk.com/mdx-deck/card.png' />
+</Head>
+
+# MDX Deck
+
+MDX-based presentation decks
+
+---
+
+<CodeSurfer>
+
+```js 1 title="Title" subtitle="Look at the first line"
+console.log(1);
+console.log(2);
+console.log(3);
+```
+
+```js 2 title="Title" subtitle="and now the second"
+console.log(1);
+console.log(2);
+console.log(3);
+```
+
+</CodeSurfer>
+
+---
+
+# Presentation decks
+
+---
+
+# Built with [MDX][]
+[MDX]: https://github.com/mdx-js/mdx
+
+---
+
+### Import and Use React Components
+
+<Counter />
+
+---
+
+- Make bulleted lists
+- To help make your point
+
+---
+
+## Getting Started
+
+1. `npm i -D mdx-deck`
+2. Write in markdown and JSX
+3. Present
+
+---
+
+## Features
+
+- Presenter Mode
+- Speaker Notes
+- Theming
+
+---
+
+```jsx
+<button>code example</button>
+```
+
+<Notes>
+
+- These are speaker notes
+- And they won't be rendered in your slide
+
+</Notes>
+
+---
+
+```jsx
+class extends React.Component {
+  render () {
+    return (
+      <React.Fragment>
+        <h1>Indented code</h1>
+      </React.Fragment>
+    )
+  }
+}
+```
+
+---
+
+> “Blockquotes are essential to any good presentation”
+
+– Anonymous
+
+<Notes>
+  <ul>
+    <li>Speaker notes can also be</li>
+    <li>Written in JSX</li>
+  </ul>
+</Notes>
+
+---
+
+### Steps Component
+
+<Steps>
+
+- One
+- Two
+- Three
+- Four
+
+</Steps>
+
+---
+
+<img src='https://source.unsplash.com/random/768x2048?new_york' />
+
+<Notes>
+Testing object fit
+</Notes>
+
+---
+
+<img src='https://images.unsplash.com/photo-1462331940025-496dfbfc7564?new_york&w=2048&q=20' />
+
+---
+
+![](https://images.unsplash.com/photo-1462331940025-496dfbfc7564?new_york&w=2048&h=1024&q=20&fit=crop)
+
+Inline image
+
+---
+
+Prop | Type | Description
+---|---|---
+`width` | number, string, or array | sets element width
+`color` | string | sets foreground color
+`bg` | string | sets background color
+
+---
+
+<Invert>
+
+# Get started :sunglasses:
+
+[GitHub](https://github.com/jxnblk/mdx-deck)
+
+</Invert>

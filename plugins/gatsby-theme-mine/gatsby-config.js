@@ -29,6 +29,7 @@ module.exports = themeOptions => {
           path: options.pagesPath,
         },
       },
+      `gatsby-plugin-theme-ui`,
       `gatsby-plugin-sharp`,
       `gatsby-transformer-sharp`,
       options.mdx && {
@@ -38,7 +39,6 @@ module.exports = themeOptions => {
           extensions: [`.mdx`, `.md`],
           remarkPlugins,
           gatsbyRemarkPlugins: [
-            `gatsby-remark-import-code`,
             {
               resolve: `gatsby-remark-imgs`,
               options: {
@@ -60,18 +60,18 @@ module.exports = themeOptions => {
                 baseUrl:
                   "https://cdn.jsdelivr.net/gh/mqjd/assets@latest/",
               },
-            }
+            },
+            `gatsby-remark-import-code`,
           ],
         },
       },
       `gatsby-plugin-react-helmet`,
       `gatsby-plugin-catch-links`,
       "gatsby-plugin-emotion",
-      `gatsby-plugin-theme-ui`,
       {
         resolve: "gatsby-plugin-compile-es6-packages",
         options: {
-          modules: ["mdx-deck", "@mdx-deck/themes"],
+          modules: ["mdx-deck", "@mdx-deck/themes", "@mdx-deck/gatsby-plugin"],
         },
       },
     ].filter(Boolean),

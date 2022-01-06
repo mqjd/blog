@@ -1,6 +1,5 @@
 import * as React from "react"
 import Post from "../components/post"
-import Deck from "./deck"
 
 type Props = {
   data: {
@@ -11,11 +10,5 @@ type Props = {
 }
 
 export default function MinimalBlogCorePost({ ...props }: Props) {
-
-  if(props.data.post.deck) {
-    return <Deck {...props}></Deck>
-  } else {
-    return <Post {...props} />
-
-  }
+  return <Post {...props} />
 }
