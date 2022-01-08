@@ -1,0 +1,1499 @@
+---
+title: "Deck Plus"
+date: 2022-01-06 20:04:44
+slug: "/deck-plus"
+deck: true
+tags:
+  - Deck
+---
+
+import { CodeSurfer, CodeSurferColumns, Step } from "code-surfer"
+import { LiveCode } from 'mdx-deck-live-code'
+
+import IconGrid from './components/IconGrid'
+import DecoupleLine from './components/DecoupleLine'
+import Database from './components/Database'
+import BusinessLogic from './components/BusinessLogic'
+import API from './components/API'
+import ABTest from './components/ABTest'
+import Render from './components/Render'
+import Components from './components/Components'
+import DataFetching from './components/DataFetching'
+import FeatureFlag from './components/FeatureFlag'
+import { ZoomSteps } from './components/lib'
+import Circle from './components/Circle'
+import MovableCircle from './components/MovableCircle'
+import AnimatedCircle from './components/AnimatedCircle'
+import ReleaseSchedule from './components/ReleaseSchedule'
+import StepCounter from './components/StepCounter'
+
+import customTheme from './theme'
+
+export const theme = customTheme
+
+import onereqoneres from "./images/one-req-one-res.png"
+import onereqmanyres from "./images/one-req-many-res.png"
+import onereqmanyres1 from "./images/one-req-many-res-1.png"
+import onereqmanyres2 from "./images/one-req-many-res-2.png"
+import onereqmanyres3 from "./images/one-req-many-res-3.png"
+import onereqmanyres4 from "./images/one-req-many-res-4.png"
+import onereqmanyres4_1 from "./images/one-req-many-res-4-1.png"
+import onereqmanyres6 from "./images/one-req-many-res-6.png"
+import release from "./images/release.png"
+
+# Intro to MDX Deck
+
+---
+
+# Copernicus Tech Debt Demolition
+
+<Appear>
+
+### 🙋‍♀️ _"but how did you make the slides?"_
+
+</Appear>
+
+---
+
+<CodeSurferColumns sizes={[2,3]}>
+<Step>
+
+<img src={onereqmanyres1} />
+
+```js title="Alternative: Sideposting via Spraypaint \"with\" option"
+  const householdMembers = members.map((member, idx) => {
+    const incomes = member.incomes ? member.incomes.map(
+      ({ incomeAmount, incomeType, notes, ssnClaimBenefitsNumber }) =>
+        new IncomeResource({
+          incomeType,
+          notes,
+          amount: incomeAmount,
+          ssnClaimBenefitsNumber
+        })
+    ) : null
+
+    const assets = member.assets ? member.assets.map(
+      ({annualIncome, cashValue, divestedDate, notes, status }) =>
+        new AssetResource({
+          status,
+          cashValue,
+          annualIncome,
+          notes,
+          divestedDate
+        })
+    ) : null
+
+    return new HouseholdMemberResource({
+      ...member,
+      incomes,
+      assets
+    })
+  })
+
+  const certDetailModel = new Detail({
+    subsidyType,
+    effectiveDate,
+    moveInDate,
+    transactionType,
+      // ... more attributes
+    eligibilityCheckNotRequired,
+    householdMembers
+  })
+
+  const incomeCertificationCore = new IncomeCertificationCore()
+  incomeCertificationCore.assignAttributes({
+    id,
+    unitUuid,
+    certDetailType: projectType,
+    certificationDetail: certDetailModel
+  })
+
+  await incomeCertificationCore.save({
+    with: {
+      certificationDetail: {
+        householdMembers: ['assets', 'incomes']
+      }
+    }
+  })
+```
+
+</Step>
+<Step>
+
+<img src={onereqmanyres3} />
+
+```js 2:10 title="Alternative: Sideposting via Spraypaint \"with\" option" subtitle="Create Income resources"
+  const householdMembers = members.map((member, idx) => {
+    const incomes = member.incomes ? member.incomes.map(
+      ({ incomeAmount, incomeType, notes, ssnClaimBenefitsNumber }) =>
+        new IncomeResource({
+          incomeType,
+          notes,
+          amount: incomeAmount,
+          ssnClaimBenefitsNumber
+        })
+    ) : null
+
+    const assets = member.assets ? member.assets.map(
+      ({annualIncome, cashValue, divestedDate, notes, status }) =>
+        new AssetResource({
+          status,
+          cashValue,
+          annualIncome,
+          notes,
+          divestedDate
+        })
+    ) : null
+
+    return new HouseholdMemberResource({
+      ...member,
+      incomes,
+      assets
+    })
+  })
+
+  const certDetailModel = new Detail({
+    subsidyType,
+    effectiveDate,
+    moveInDate,
+    transactionType,
+      // ... more attributes
+    eligibilityCheckNotRequired,
+    householdMembers
+  })
+
+  const incomeCertificationCore = new IncomeCertificationCore()
+  incomeCertificationCore.assignAttributes({
+    id,
+    unitUuid,
+    certDetailType: projectType,
+    certificationDetail: certDetailModel
+  })
+
+  await incomeCertificationCore.save({
+    with: {
+      certificationDetail: {
+        householdMembers: ['assets', 'incomes']
+      }
+    }
+  })
+```
+
+</Step>
+<Step>
+
+<img src={onereqmanyres4} />
+
+```js 12:21 title="Alternative: Sideposting via Spraypaint \"with\" option" subtitle="Create Asset resources"
+  const householdMembers = members.map((member, idx) => {
+    const incomes = member.incomes ? member.incomes.map(
+      ({ incomeAmount, incomeType, notes, ssnClaimBenefitsNumber }) =>
+        new IncomeResource({
+          incomeType,
+          notes,
+          amount: incomeAmount,
+          ssnClaimBenefitsNumber
+        })
+    ) : null
+
+    const assets = member.assets ? member.assets.map(
+      ({annualIncome, cashValue, divestedDate, notes, status }) =>
+        new AssetResource({
+          status,
+          cashValue,
+          annualIncome,
+          notes,
+          divestedDate
+        })
+    ) : null
+
+    return new HouseholdMemberResource({
+      ...member,
+      incomes,
+      assets
+    })
+  })
+
+  const certDetailModel = new Detail({
+    subsidyType,
+    effectiveDate,
+    moveInDate,
+    transactionType,
+      // ... more attributes
+    eligibilityCheckNotRequired,
+    householdMembers
+  })
+
+  const incomeCertificationCore = new IncomeCertificationCore()
+  incomeCertificationCore.assignAttributes({
+    id,
+    unitUuid,
+    certDetailType: projectType,
+    certificationDetail: certDetailModel
+  })
+
+  await incomeCertificationCore.save({
+    with: {
+      certificationDetail: {
+        householdMembers: ['assets', 'incomes']
+      }
+    }
+  })
+```
+
+</Step>
+<Step>
+
+<img src={onereqmanyres2} />
+
+```js 23:27 title="Alternative: Sideposting via Spraypaint \"with\" option" subtitle="Create Household Member Resource from Incomes and Assets"
+  const householdMembers = members.map((member, idx) => {
+    const incomes = member.incomes ? member.incomes.map(
+      ({ incomeAmount, incomeType, notes, ssnClaimBenefitsNumber }) =>
+        new IncomeResource({
+          incomeType,
+          notes,
+          amount: incomeAmount,
+          ssnClaimBenefitsNumber
+        })
+    ) : null
+
+    const assets = member.assets ? member.assets.map(
+      ({annualIncome, cashValue, divestedDate, notes, status }) =>
+        new AssetResource({
+          status,
+          cashValue,
+          annualIncome,
+          notes,
+          divestedDate
+        })
+    ) : null
+
+    return new HouseholdMemberResource({
+      ...member,
+      incomes,
+      assets
+    })
+  })
+
+  const certDetailModel = new Detail({
+    subsidyType,
+    effectiveDate,
+    moveInDate,
+    transactionType,
+      // ... more attributes
+    eligibilityCheckNotRequired,
+    householdMembers
+  })
+
+  const incomeCertificationCore = new IncomeCertificationCore()
+  incomeCertificationCore.assignAttributes({
+    id,
+    unitUuid,
+    certDetailType: projectType,
+    certificationDetail: certDetailModel
+  })
+
+  await incomeCertificationCore.save({
+    with: {
+      certificationDetail: {
+        householdMembers: ['assets', 'incomes']
+      }
+    }
+  })
+```
+
+</Step>
+<Step>
+
+<img src={onereqmanyres4_1} />
+
+```js 1:27 title="Alternative: Sideposting via Spraypaint \"with\" option" subtitle="Create Household Member Resource from Incomes and Assets"
+  const householdMembers = members.map((member, idx) => {
+    const incomes = member.incomes ? member.incomes.map(
+      ({ incomeAmount, incomeType, notes, ssnClaimBenefitsNumber }) =>
+        new IncomeResource({
+          incomeType,
+          notes,
+          amount: incomeAmount,
+          ssnClaimBenefitsNumber
+        })
+    ) : null
+
+    const assets = member.assets ? member.assets.map(
+      ({annualIncome, cashValue, divestedDate, notes, status }) =>
+        new AssetResource({
+          status,
+          cashValue,
+          annualIncome,
+          notes,
+          divestedDate
+        })
+    ) : null
+
+    return new HouseholdMemberResource({
+      ...member,
+      incomes,
+      assets
+    })
+  })
+
+  const certDetailModel = new Detail({
+    subsidyType,
+    effectiveDate,
+    moveInDate,
+    transactionType,
+      // ... more attributes
+    eligibilityCheckNotRequired,
+    householdMembers
+  })
+
+  const incomeCertificationCore = new IncomeCertificationCore()
+  incomeCertificationCore.assignAttributes({
+    id,
+    unitUuid,
+    certDetailType: projectType,
+    certificationDetail: certDetailModel
+  })
+
+  await incomeCertificationCore.save({
+    with: {
+      certificationDetail: {
+        householdMembers: ['assets', 'incomes']
+      }
+    }
+  })
+```
+
+</Step>
+<Step>
+
+<img src={onereqmanyres6} />
+
+```js 48:56 title="Alternative: Sideposting via Spraypaint \"with\" option" subtitle="Save the income certification \"with\" the related details, assets, and incomes resources"
+  const householdMembers = members.map((member, idx) => {
+    const incomes = member.incomes ? member.incomes.map(
+      ({ incomeAmount, incomeType, notes, ssnClaimBenefitsNumber }) =>
+        new IncomeResource({
+          incomeType,
+          notes,
+          amount: incomeAmount,
+          ssnClaimBenefitsNumber
+        })
+    ) : null
+
+    const assets = member.assets ? member.assets.map(
+      ({annualIncome, cashValue, divestedDate, notes, status }) =>
+        new AssetResource({
+          status,
+          cashValue,
+          annualIncome,
+          notes,
+          divestedDate
+        })
+    ) : null
+
+    return new HouseholdMemberResource({
+      ...member,
+      incomes,
+      assets
+    })
+  })
+
+  const certDetailModel = new Detail({
+    subsidyType,
+    effectiveDate,
+    moveInDate,
+    transactionType,
+      // ... more attributes
+    eligibilityCheckNotRequired,
+    householdMembers
+  })
+
+  const incomeCertificationCore = new IncomeCertificationCore()
+  incomeCertificationCore.assignAttributes({
+    id,
+    unitUuid,
+    certDetailType: projectType,
+    certificationDetail: certDetailModel
+  })
+
+  await incomeCertificationCore.save({
+    with: {
+      certificationDetail: {
+        householdMembers: ['assets', 'incomes']
+      }
+    }
+  })
+```
+
+</Step>
+</CodeSurferColumns>
+
+
+---
+
+# Components as Data
+
+---
+
+<div
+  style={{
+    width: '100vw',
+    height: '100vh',
+    backgroundColor: 'white',
+  }}
+>
+  <IconGrid>
+    <ZoomSteps>
+      <Database style={{ gridRow: '2/3', gridColumn: '1/2' }} />
+      <BusinessLogic style={{ gridRow: '2/3', gridColumn: '2/3' }} />
+      <DataFetching style={{ gridRow: '2/3', gridColumn: '3/4' }} />
+      <FeatureFlag style={{ gridRow: '3/4', gridColumn: '4/5' }} />
+      <ABTest style={{ gridRow: '1/2', gridColumn: '4/5' }} />
+      <Components style={{ gridRow: '2/3', gridColumn: '4/5' }} />
+      <Render style={{ gridRow: '2/3', gridColumn: '5/6' }} />
+    </ZoomSteps>
+  </IconGrid>
+</div>
+
+---
+
+<div
+  style={{
+    width: '100vw',
+    height: '100vh',
+    backgroundColor: 'white',
+  }}
+>
+  <IconGrid>
+    <Database style={{ gridRow: '2/3', gridColumn: '1/2' }} />
+    <BusinessLogic style={{ gridRow: '2/3', gridColumn: '2/3' }} />
+    <DataFetching style={{ gridRow: '2/3', gridColumn: '3/4'}} />
+    <FeatureFlag style={{ gridRow: '3/4', gridColumn: '4/5' }} />
+    <ABTest style={{ gridRow: '1/2', gridColumn: '4/5' }} />
+    <Components style={{gridRow: '2/3', gridColumn: '4/5' }} />
+    <Render style={{ gridRow: '2/3', gridColumn: '5/6' }} />
+  </IconGrid>
+  <DecoupleLine steps={['LEFT', 'MID_LEFT', 'FAR_RIGHT', 'MID_RIGHT']} />
+</div>
+
+---
+
+# MDX Deck
+
+## React MDX-based presentation decks
+
+---
+
+<CodeSurfer>
+
+```md title="What is Markdown?" subtitle="A lightweight markup language with plain-text-formatting syntax"
+# Heading
+- **List**
+- of
+- important *things*
+
+`console.log('code sample')`
+
+[Learn more!](https://www.markdownguide.org/)
+```
+
+</CodeSurfer>
+
+---
+
+<CodeSurfer>
+
+```md title="What is MDX?" subtitle="MDX is an authorable format for writing JSX in your Markdown"
+# Heading
+- **List**
+- of
+- important *things*
+
+`console.log('code sample')`
+
+[Learn more!](https://www.markdownguide.org/)
+```
+
+```mdx 1:12 title="MDX" subtitle="Inline components in your markdown. Think short codes!"
+import InteractiveChart from './components'
+
+# Heading
+- **List**
+- of
+- important *things*
+
+<InteractiveChart size="medium" />
+
+`console.log('code sample')`
+
+[Learn more!](https://www.markdownguide.org/)
+```
+
+</CodeSurfer>
+
+---
+
+# MDX Deck
+`npm install mdx-deck`
+
+- 📝 Write presentations in markdown
+- ⚛️ Import and use React components
+- 💅 Customizable themes and components
+- 0️⃣ Zero-config CLI
+- 💁 Presenter mode
+- 📓 Speaker notes
+
+---
+
+## `<Appear />`
+
+<Appear>
+
+<img width="800px" alt="boo" src="https://media.giphy.com/media/mDLkpVWddyqqI/giphy.gif" />
+
+</Appear>
+
+---
+
+<CodeSurfer >
+
+```md title="<Appear/> Code sample"
+## `<Appear />`
+
+<Appear>
+
+<img
+  width="800px"
+  alt="boo"
+  src="https://media.giphy.com/media/mDLkpVWddyqqI/giphy.gif"
+/>
+
+</Appear>
+```
+
+</CodeSurfer>
+
+
+---
+
+## `<Split />`
+
+<Split>
+
+![](https://media.giphy.com/media/PllyuUTPUHjqWqox5l/giphy.gif)
+
+![](https://media.giphy.com/media/oz4mYmqFT2GTIaD5Ga/giphy.gif)
+
+</Split>
+
+---
+
+<CodeSurfer >
+
+```md title="<Split/> Code sample"
+## `<Split />`
+
+<Split>
+
+![left](https://media.giphy.com/media/PllyuUTPUHjqWqox5l/giphy.gif)
+
+![right](https://media.giphy.com/media/oz4mYmqFT2GTIaD5Ga/giphy.gif)
+
+</Split>
+```
+
+</CodeSurfer>
+
+---
+
+## `<Notes />`
+
+<Notes>
+
+* Notes is exactly what it sounds like
+* A way to create speaker notes, viewable only in speaker mode
+
+</Notes>
+
+---
+
+# This is the Next Slide
+
+---
+
+# "Those code slides are magic"
+
+<img width="800px" alt="david blain" src="https://media.giphy.com/media/Sf0lxerEx2eNG/giphy.gif" />
+
+---
+
+<CodeSurfer>
+
+```md title="Animated Code Samples with <CodeSurfer/ >"
+
+<CodeSurfer>
+
+```md title="Markdown"
+# Heading
+- **List**
+- of
+- important *things*
+
+`console.log('code sample')`
+
+[Learn more!](https://www.markdownguide.org/)
+‎```
+
+</CodeSurfer>
+
+```
+
+```md 1:30 title="Animated Code Samples with <CodeSurfer/ >"
+
+<CodeSurfer>
+
+```md title="Markdown"
+# Heading
+- **List**
+- of
+- important *things*
+
+`console.log('code sample')`
+
+[Learn more!](https://www.markdownguide.org/)
+‎```
+
+```mdx 1:12 title="MDX" subtitle="Inline components in your markdown. Think short codes!"
+import InteractiveChart from './components'
+
+# Heading
+- **List**
+- of
+- important *things*
+
+<InteractiveChart size="medium" />
+
+`console.log('code sample')`
+
+[Learn more!](https://www.markdownguide.org/)
+‎```
+
+</CodeSurfer>
+
+```
+
+```md 15 title="CodeSurfer API" subtitle="highlight, line ranges, and columns. add titles, and subtitles"
+
+<CodeSurfer>
+
+```md title="Markdown"
+# Heading
+- **List**
+- of
+- important *things*
+
+`console.log('code sample')`
+
+[Learn more!](https://www.markdownguide.org/)
+‎```
+
+```mdx 1:12 title="MDX" subtitle="Inline components in your markdown. Think short codes!"
+import InteractiveChart from './components'
+
+# Heading
+- **List**
+- of
+- important *things*
+
+<InteractiveChart size="medium" />
+
+`console.log('code sample')`
+
+[Learn more!](https://www.markdownguide.org/)
+‎```
+
+</CodeSurfer>
+
+```
+
+```md title="CodeSurfer API" subtitle="CodeSurfer parses the AST, diffs between steps and animates accordingly"
+
+<CodeSurfer>
+
+```md title="Markdown"
+# Heading
+- **List**
+- of
+- important *things*
+
+`console.log('code sample')`
+
+[Learn more!](https://www.markdownguide.org/)
+‎```
+
+</CodeSurfer>
+
+```
+
+</CodeSurfer>
+
+---
+
+<LiveCode
+  title="Live coding with <LiveCode />"
+  size="large"
+  previewProps={{
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+    }
+  }}
+  editorProps={{
+    style: {
+      fontSize: '0.4em',
+      backgroundColor: '#121212'
+    }
+  }}
+  code={`() => {
+    const [count, setCount] = React.useState(1)
+    return (
+      <button
+        style={{ color: "white", padding: "40px", background: "linear-gradient(45deg,#0cf,#4be8ff)", borderRadius: "15px", fontSize: '2rem',border: 0 }}
+        onClick={() =>
+          setCount(count => count + 1)
+        }
+      >
+        {\`Num Clicks: \${count}\`}
+      </button>
+    )
+  }`}
+/>
+
+---
+
+## Custom MDX Deck Components
+
+<img src="https://media.giphy.com/media/10yIEN8cMn4i9W/giphy.gif" />
+
+---
+
+# useSteps
+
+---
+
+<CodeSurferColumns sizes={[2,3]}>
+
+<Step>
+
+### The current step is 1/4
+
+```jsx 
+import React from 'react'
+import { useSteps } from 'mdx-deck'
+
+export default props => {
+  const length = 4
+  const step = useSteps(length)
+
+  return (
+    <h2>
+      The current step is {step}/{length}
+    </h2>
+  )
+}
+```
+
+</Step>
+<Step>
+
+### The current step is 2/4
+
+```jsx 5:6
+import React from 'react'
+import { useSteps } from 'mdx-deck'
+
+export default props => {
+  const length = 4
+  const step = useSteps(length)
+
+  return (
+    <h2>
+      The current step is {step}/{length}
+    </h2>
+  )
+}
+```
+
+</Step>
+<Step>
+
+### The current step is 3/4
+
+```jsx 10
+import React from 'react'
+import { useSteps } from 'mdx-deck'
+
+export default props => {
+  const length = 4
+  const step = useSteps(length)
+
+  return (
+    <h2>
+      The current step is {step}/{length}
+    </h2>
+  )
+}
+```
+
+</Step>
+<Step>
+
+### The current step is 4/4
+
+```jsx 10[27:41]
+import React from 'react'
+import { useSteps } from 'mdx-deck'
+
+export default props => {
+  const length = 4
+  const step = useSteps(length)
+
+  return (
+    <h2>
+      The current step is {step}/{length}
+    </h2>
+  )
+}
+```
+
+</Step>
+
+</CodeSurferColumns>
+
+---
+
+<CodeSurferColumns sizes={[2,3]}>
+<Step>
+
+<svg height="100%" width="100%">
+  <Circle color="red" />
+</svg>
+
+```jsx
+import React from 'react'
+
+export default ({
+  color,
+  x = '50%',
+  y = '50%'
+}) => (
+  <circle
+    cx={x}
+    cy={y}
+    r="50"
+    fill={color}
+  />
+)
+```
+
+</Step>
+</CodeSurferColumns>
+
+---
+
+<CodeSurfer>
+
+```jsx
+import React from 'react'
+import { useSteps } from 'mdx-deck'
+import Circle from './Circle'
+
+export default ({
+  color = 'white',
+  x=['50%', '75%', '21%'],
+  y=['50%', '75%', '81%']
+}) => {
+  const step = useSteps(x.length-1)
+  return (
+    <Circle
+      x={x[step]}
+      y={y[step]}
+      r="50"
+    />
+  )
+}
+```
+
+```jsx 2
+import React from 'react'
+import { useSteps } from 'mdx-deck'
+import Circle from './Circle'
+
+export default ({
+  color = 'white',
+  x=['50%', '75%', '21%'],
+  y=['50%', '75%', '81%']
+}) => {
+  const step = useSteps(x.length-1)
+  return (
+    <Circle
+      x={x[step]}
+      y={y[step]}
+      r="50"
+    />
+  )
+}
+```
+
+```jsx 7,8,10,13,14
+import React from 'react'
+import { useSteps } from 'mdx-deck'
+import Circle from './Circle'
+
+export default ({
+  color = 'white',
+  x=['50%', '75%', '21%'],
+  y=['50%', '75%', '81%']
+}) => {
+  const step = useSteps(x.length-1)
+  return (
+    <Circle
+      x={x[step]}
+      y={y[step]}
+      r="50"
+    />
+  )
+}
+```
+
+</CodeSurfer>
+
+---
+
+<svg height="100%" width="100%">
+  <MovableCircle color="red" />
+</svg>
+
+---
+
+
+<CodeSurfer>
+
+```jsx
+import React from 'react'
+import { useSteps } from 'mdx-deck'
+import { useSpring, animated } from 'react-spring'
+import Circle from './Circle'
+
+const AnimatedCircle = animated(Circle)
+
+export default ({
+  color,
+  x,
+  y
+}) => {
+  const step = useSteps(x.length-1)
+  const props = useSpring({ x: x[step],y: y[step]})
+  return (
+    <AnimatedCircle
+      x={props.x}
+      y={props.y}
+      r="50"
+      color={color}
+    />
+  )
+}
+```
+
+```jsx 2:3
+import React from 'react'
+import { useSteps } from 'mdx-deck'
+import { useSpring, animated } from 'react-spring'
+import Circle from './Circle'
+
+const AnimatedCircle = animated(Circle)
+
+export default ({
+  color,
+  x,
+  y
+}) => {
+  const step = useSteps(x.length-1)
+  const props = useSpring({ x: x[step],y: y[step]})
+  return (
+    <AnimatedCircle
+      x={props.x}
+      y={props.y}
+      r="50"
+      color={color}
+    />
+  )
+}
+```
+
+```jsx 10,11,13,14
+import React from 'react'
+import { useSteps } from 'mdx-deck'
+import { useSpring, animated } from 'react-spring'
+import Circle from './Circle'
+
+const AnimatedCircle = animated(Circle)
+
+export default ({
+  color,
+  x,
+  y
+}) => {
+  const step = useSteps(x.length-1)
+  const props = useSpring({ x: x[step],y: y[step]})
+  return (
+    <AnimatedCircle
+      x={props.x}
+      y={props.y}
+      r="50"
+      color={color}
+    />
+  )
+}
+```
+
+```jsx 10,11,13[8:12],14[17:51]
+import React from 'react'
+import { useSteps } from 'mdx-deck'
+import { useSpring, animated } from 'react-spring'
+import Circle from './Circle'
+
+const AnimatedCircle = animated(Circle)
+
+export default ({
+  color,
+  x,
+  y
+}) => {
+  const step = useSteps(x.length-1)
+  const props = useSpring({ x: x[step],y: y[step]})
+  return (
+    <AnimatedCircle
+      x={props.x}
+      y={props.y}
+      r="50"
+      color={color}
+    />
+  )
+}
+```
+
+```jsx 14[8:13],16,17,18
+import React from 'react'
+import { useSteps } from 'mdx-deck'
+import { useSpring, animated } from 'react-spring'
+import Circle from './Circle'
+
+const AnimatedCircle = animated(Circle)
+
+export default ({
+  color,
+  x,
+  y
+}) => {
+  const step = useSteps(x.length-1)
+  const props = useSpring({ x: x[step],y: y[step]})
+  return (
+    <AnimatedCircle
+      x={props.x}
+      y={props.y}
+      r="50"
+      color={color}
+    />
+  )
+}
+```
+
+</CodeSurfer>
+
+---
+
+<StepCounter num={5} />
+
+<svg height="100%" width="100%">
+  <AnimatedCircle
+    color="red"
+    y={['80%','85%','15%','90%','11%']}
+    x={['10%','65%','83%','10%','22%']}
+  />
+  <AnimatedCircle
+    color="purple"
+    x={['10%','75%','15%','90%','11%']}
+    y={['20%','75%','83%','10%','22%']}
+  />
+  <AnimatedCircle
+    color="blue"
+    x={['83%','10%','22%','90%','11%']}
+    y={['50%','75%','50%','75%','15%']}
+  />
+  <AnimatedCircle
+    color="green"
+    x={['83%','10%','18%','90%','11%'].reverse()}
+    y={['50%','75%','44%','75%','15%'].reverse()}
+  />
+</svg>
+
+---
+
+<span style={{ fontSize: '12rem' }}>🤔</span>
+
+---
+
+# `<ReleaseSchedule />`
+
+<img alr="release schedule" src={release} />
+
+---
+
+<CodeSurfer>
+
+```jsx title="MDX Deck Release Schedule"
+export default () => {
+  const [selected, setSelected] = React.useState('none')
+  const release = COLORS.indexOf(selected)
+  const step = useSteps(7);
+
+  return (
+    <svg width='100%' height='100%'>
+      <g id='columnGroup'>
+        <RowLabel active={isActiveEnv(release, step, 0)} x={X_AXIS_OFFSET} y={row(0)}>Branch</RowLabel>
+        <RowLabel active={isActiveEnv(release, step, 1)} x={X_AXIS_OFFSET} y={row(1)}>Internal</RowLabel>
+        <RowLabel active={isActiveEnv(release, step, 2)} x={X_AXIS_OFFSET} y={row(2)}>Live 1</RowLabel>
+        <RowLabel active={isActiveEnv(release, step, 3)} x={X_AXIS_OFFSET} y={row(3)}>Live All</RowLabel>
+
+        <ColLabel active={isActiveDay(release, step, 0)} x={col(0)} y={Y_AXIS_OFFSET}>M</ColLabel>
+        <ColLabel active={isActiveDay(release, step, 1)} x={col(1)} y={Y_AXIS_OFFSET}>T</ColLabel>
+        <ColLabel active={isActiveDay(release, step, 2)} x={col(2)} y={Y_AXIS_OFFSET}>W</ColLabel>
+        <ColLabel active={isActiveDay(release, step, 3)} x={col(3)} y={Y_AXIS_OFFSET}>T</ColLabel>
+        <ColLabel active={isActiveDay(release, step, 4)} x={col(4)} y={Y_AXIS_OFFSET}>F</ColLabel>
+        <ColLabel active={isActiveDay(release, step, 5)} x={col(5)} y={Y_AXIS_OFFSET}>S</ColLabel>
+        <ColLabel active={isActiveDay(release, step, 6)} x={col(6)} y={Y_AXIS_OFFSET}>S</ColLabel>
+        <ColLabel active={isActiveDay(release, step, 7)} x={col(7)} y={Y_AXIS_OFFSET}>M</ColLabel>
+        <ColLabel active={isActiveDay(release, step, 8)} x={col(8)} y={Y_AXIS_OFFSET}>T</ColLabel>
+      </g>
+      {/* Red Line */}
+      <Line x1={col(0)} y1={row(0)} x2={col(3)} y2={row(3)} color="red" selected={selected} />
+      {/* Purple Lines */}
+      <Line x1={col(1)} y1={row(0)} x2={col(3)} y2={row(2)} color="purple" selected={selected} />
+      <Line x1={col(3)} y1={row(2)} x2={col(7)} y2={row(2)} color="purple" selected={selected} dashed />
+      <Line x1={col(7)} y1={row(2)} x2={col(8)} y2={row(3)} color="purple" selected={selected} />
+      {/* Blue Lines */}
+      <Line x1={col(2)} y1={row(0)} x2={col(4)} y2={row(2)} color="blue" selected={selected}  />
+      <Line x1={col(4)} y1={row(2)} x2={col(7)} y2={row(2)} color="blue" selected={selected} dashed />
+      <Line x1={col(7)} y1={row(2)} x2={col(8)} y2={row(3)} color="blue" selected={selected}  />
+      {/* Green Lines */}
+      <Line x1={col(3)} y1={row(0)} x2={col(4)} y2={row(1)} color="green" selected={selected}  />
+      <Line x1={col(4)} y1={row(1)} x2={col(7)} y2={row(1)} color="green" selected={selected} dashed/>
+      <Line x1={col(7)} y1={row(1)} x2={col(8)} y2={row(2)} color="green" selected={selected} />
+      {/* Animated Dots */}
+      <AnimatedCircle
+        r="18"
+        toggled={selected === 'red'}
+        fillOpacity={selectedOpacity(selected, 'red')}
+        onClick={() => setSelected(selected => selected !== 'red' ? 'red' : 'none')}
+        color="red"
+        x={DAY_STEPS[0].map(col)}
+        y={ENV_STEPS[0].map(row)}
+      />
+      <AnimatedCircle
+        toggled={selected === 'purple'}
+        fillOpacity={selectedOpacity(selected, 'purple')}
+        onClick={() => setSelected(selected => selected !== 'purple' ? 'purple' : 'none')}
+        r="18"
+        color="purple"
+        x={DAY_STEPS[1].map(col)}
+        y={ENV_STEPS[1].map(row)}
+      />
+      <AnimatedCircle
+        toggled={selected === 'blue'}
+        fillOpacity={selectedOpacity(selected, 'blue')}
+        onClick={() => setSelected(selected => selected !== 'blue' ? 'blue' : 'none')}
+        r="18"
+        color="blue"
+        x={DAY_STEPS[2].map(col)}
+        y={ENV_STEPS[2].map(row)}
+      />
+      <AnimatedCircle
+        toggled={selected === 'green'}
+        onClick={() => setSelected(selected => selected !== 'green' ? 'green' : 'none')}
+        fillOpacity={selectedOpacity(selected, 'green')}
+        r="18"
+        color="green" 
+        x={DAY_STEPS[3].map(col)}
+        y={ENV_STEPS[3].map(row)}
+      />
+    </svg>
+  )
+}
+```
+
+```jsx 9:22 subtitle="col/row helpers position svgs, highlight when active"
+export default () => {
+  const [selected, setSelected] = React.useState('none')
+  const release = COLORS.indexOf(selected)
+  const step = useSteps(7);
+
+  return (
+    <svg width='100%' height='100%'>
+      <g id='columnGroup'>
+        <RowLabel active={isActiveEnv(release, step, 0)} x={X_AXIS_OFFSET} y={row(0)}>Branch</RowLabel>
+        <RowLabel active={isActiveEnv(release, step, 1)} x={X_AXIS_OFFSET} y={row(1)}>Internal</RowLabel>
+        <RowLabel active={isActiveEnv(release, step, 2)} x={X_AXIS_OFFSET} y={row(2)}>Live 1</RowLabel>
+        <RowLabel active={isActiveEnv(release, step, 3)} x={X_AXIS_OFFSET} y={row(3)}>Live All</RowLabel>
+
+        <ColLabel active={isActiveDay(release, step, 0)} x={col(0)} y={Y_AXIS_OFFSET}>M</ColLabel>
+        <ColLabel active={isActiveDay(release, step, 1)} x={col(1)} y={Y_AXIS_OFFSET}>T</ColLabel>
+        <ColLabel active={isActiveDay(release, step, 2)} x={col(2)} y={Y_AXIS_OFFSET}>W</ColLabel>
+        <ColLabel active={isActiveDay(release, step, 3)} x={col(3)} y={Y_AXIS_OFFSET}>T</ColLabel>
+        <ColLabel active={isActiveDay(release, step, 4)} x={col(4)} y={Y_AXIS_OFFSET}>F</ColLabel>
+        <ColLabel active={isActiveDay(release, step, 5)} x={col(5)} y={Y_AXIS_OFFSET}>S</ColLabel>
+        <ColLabel active={isActiveDay(release, step, 6)} x={col(6)} y={Y_AXIS_OFFSET}>S</ColLabel>
+        <ColLabel active={isActiveDay(release, step, 7)} x={col(7)} y={Y_AXIS_OFFSET}>M</ColLabel>
+        <ColLabel active={isActiveDay(release, step, 8)} x={col(8)} y={Y_AXIS_OFFSET}>T</ColLabel>
+      </g>
+      {/* Red Line */}
+      <Line x1={col(0)} y1={row(0)} x2={col(3)} y2={row(3)} color="red" selected={selected} />
+      {/* Purple Lines */}
+      <Line x1={col(1)} y1={row(0)} x2={col(3)} y2={row(2)} color="purple" selected={selected} />
+      <Line x1={col(3)} y1={row(2)} x2={col(7)} y2={row(2)} color="purple" selected={selected} dashed />
+      <Line x1={col(7)} y1={row(2)} x2={col(8)} y2={row(3)} color="purple" selected={selected} />
+      {/* Blue Lines */}
+      <Line x1={col(2)} y1={row(0)} x2={col(4)} y2={row(2)} color="blue" selected={selected}  />
+      <Line x1={col(4)} y1={row(2)} x2={col(7)} y2={row(2)} color="blue" selected={selected} dashed />
+      <Line x1={col(7)} y1={row(2)} x2={col(8)} y2={row(3)} color="blue" selected={selected}  />
+      {/* Green Lines */}
+      <Line x1={col(3)} y1={row(0)} x2={col(4)} y2={row(1)} color="green" selected={selected}  />
+      <Line x1={col(4)} y1={row(1)} x2={col(7)} y2={row(1)} color="green" selected={selected} dashed/>
+      <Line x1={col(7)} y1={row(1)} x2={col(8)} y2={row(2)} color="green" selected={selected} />
+      {/* Animated Dots */}
+      <AnimatedCircle
+        r="18"
+        toggled={selected === 'red'}
+        fillOpacity={selectedOpacity(selected, 'red')}
+        onClick={() => setSelected(selected => selected !== 'red' ? 'red' : 'none')}
+        color="red"
+        x={DAY_STEPS[0].map(col)}
+        y={ENV_STEPS[0].map(row)}
+      />
+      <AnimatedCircle
+        toggled={selected === 'purple'}
+        fillOpacity={selectedOpacity(selected, 'purple')}
+        onClick={() => setSelected(selected => selected !== 'purple' ? 'purple' : 'none')}
+        r="18"
+        color="purple"
+        x={DAY_STEPS[1].map(col)}
+        y={ENV_STEPS[1].map(row)}
+      />
+      <AnimatedCircle
+        toggled={selected === 'blue'}
+        fillOpacity={selectedOpacity(selected, 'blue')}
+        onClick={() => setSelected(selected => selected !== 'blue' ? 'blue' : 'none')}
+        r="18"
+        color="blue"
+        x={DAY_STEPS[2].map(col)}
+        y={ENV_STEPS[2].map(row)}
+      />
+      <AnimatedCircle
+        toggled={selected === 'green'}
+        onClick={() => setSelected(selected => selected !== 'green' ? 'green' : 'none')}
+        fillOpacity={selectedOpacity(selected, 'green')}
+        r="18"
+        color="green" 
+        x={DAY_STEPS[3].map(col)}
+        y={ENV_STEPS[3].map(row)}
+      />
+    </svg>
+  )
+}
+```
+
+```jsx 24:37
+export default () => {
+  const [selected, setSelected] = React.useState('none')
+  const release = COLORS.indexOf(selected)
+  const step = useSteps(7);
+
+  return (
+    <svg width='100%' height='100%'>
+      <g id='columnGroup'>
+        <RowLabel active={isActiveEnv(release, step, 0)} x={X_AXIS_OFFSET} y={row(0)}>Branch</RowLabel>
+        <RowLabel active={isActiveEnv(release, step, 1)} x={X_AXIS_OFFSET} y={row(1)}>Internal</RowLabel>
+        <RowLabel active={isActiveEnv(release, step, 2)} x={X_AXIS_OFFSET} y={row(2)}>Live 1</RowLabel>
+        <RowLabel active={isActiveEnv(release, step, 3)} x={X_AXIS_OFFSET} y={row(3)}>Live All</RowLabel>
+
+        <ColLabel active={isActiveDay(release, step, 0)} x={col(0)} y={Y_AXIS_OFFSET}>M</ColLabel>
+        <ColLabel active={isActiveDay(release, step, 1)} x={col(1)} y={Y_AXIS_OFFSET}>T</ColLabel>
+        <ColLabel active={isActiveDay(release, step, 2)} x={col(2)} y={Y_AXIS_OFFSET}>W</ColLabel>
+        <ColLabel active={isActiveDay(release, step, 3)} x={col(3)} y={Y_AXIS_OFFSET}>T</ColLabel>
+        <ColLabel active={isActiveDay(release, step, 4)} x={col(4)} y={Y_AXIS_OFFSET}>F</ColLabel>
+        <ColLabel active={isActiveDay(release, step, 5)} x={col(5)} y={Y_AXIS_OFFSET}>S</ColLabel>
+        <ColLabel active={isActiveDay(release, step, 6)} x={col(6)} y={Y_AXIS_OFFSET}>S</ColLabel>
+        <ColLabel active={isActiveDay(release, step, 7)} x={col(7)} y={Y_AXIS_OFFSET}>M</ColLabel>
+        <ColLabel active={isActiveDay(release, step, 8)} x={col(8)} y={Y_AXIS_OFFSET}>T</ColLabel>
+      </g>
+      {/* Red Line */}
+      <Line x1={col(0)} y1={row(0)} x2={col(3)} y2={row(3)} color="red" selected={selected} />
+      {/* Purple Lines */}
+      <Line x1={col(1)} y1={row(0)} x2={col(3)} y2={row(2)} color="purple" selected={selected} />
+      <Line x1={col(3)} y1={row(2)} x2={col(7)} y2={row(2)} color="purple" selected={selected} dashed />
+      <Line x1={col(7)} y1={row(2)} x2={col(8)} y2={row(3)} color="purple" selected={selected} />
+      {/* Blue Lines */}
+      <Line x1={col(2)} y1={row(0)} x2={col(4)} y2={row(2)} color="blue" selected={selected}  />
+      <Line x1={col(4)} y1={row(2)} x2={col(7)} y2={row(2)} color="blue" selected={selected} dashed />
+      <Line x1={col(7)} y1={row(2)} x2={col(8)} y2={row(3)} color="blue" selected={selected}  />
+      {/* Green Lines */}
+      <Line x1={col(3)} y1={row(0)} x2={col(4)} y2={row(1)} color="green" selected={selected}  />
+      <Line x1={col(4)} y1={row(1)} x2={col(7)} y2={row(1)} color="green" selected={selected} dashed/>
+      <Line x1={col(7)} y1={row(1)} x2={col(8)} y2={row(2)} color="green" selected={selected} />
+      {/* Animated Dots */}
+      <AnimatedCircle
+        r="18"
+        toggled={selected === 'red'}
+        fillOpacity={selectedOpacity(selected, 'red')}
+        onClick={() => setSelected(selected => selected !== 'red' ? 'red' : 'none')}
+        color="red"
+        x={DAY_STEPS[0].map(col)}
+        y={ENV_STEPS[0].map(row)}
+      />
+      <AnimatedCircle
+        toggled={selected === 'purple'}
+        fillOpacity={selectedOpacity(selected, 'purple')}
+        onClick={() => setSelected(selected => selected !== 'purple' ? 'purple' : 'none')}
+        r="18"
+        color="purple"
+        x={DAY_STEPS[1].map(col)}
+        y={ENV_STEPS[1].map(row)}
+      />
+      <AnimatedCircle
+        toggled={selected === 'blue'}
+        fillOpacity={selectedOpacity(selected, 'blue')}
+        onClick={() => setSelected(selected => selected !== 'blue' ? 'blue' : 'none')}
+        r="18"
+        color="blue"
+        x={DAY_STEPS[2].map(col)}
+        y={ENV_STEPS[2].map(row)}
+      />
+      <AnimatedCircle
+        toggled={selected === 'green'}
+        onClick={() => setSelected(selected => selected !== 'green' ? 'green' : 'none')}
+        fillOpacity={selectedOpacity(selected, 'green')}
+        r="18"
+        color="green" 
+        x={DAY_STEPS[3].map(col)}
+        y={ENV_STEPS[3].map(row)}
+      />
+    </svg>
+  )
+}
+```
+
+```jsx 38:56 subtitle="Circles animate based on step"
+export default () => {
+  const [selected, setSelected] = React.useState('none')
+  const release = COLORS.indexOf(selected)
+  const step = useSteps(7);
+
+  return (
+    <svg width='100%' height='100%'>
+      <g id='columnGroup'>
+        <RowLabel active={isActiveEnv(release, step, 0)} x={X_AXIS_OFFSET} y={row(0)}>Branch</RowLabel>
+        <RowLabel active={isActiveEnv(release, step, 1)} x={X_AXIS_OFFSET} y={row(1)}>Internal</RowLabel>
+        <RowLabel active={isActiveEnv(release, step, 2)} x={X_AXIS_OFFSET} y={row(2)}>Live 1</RowLabel>
+        <RowLabel active={isActiveEnv(release, step, 3)} x={X_AXIS_OFFSET} y={row(3)}>Live All</RowLabel>
+
+        <ColLabel active={isActiveDay(release, step, 0)} x={col(0)} y={Y_AXIS_OFFSET}>M</ColLabel>
+        <ColLabel active={isActiveDay(release, step, 1)} x={col(1)} y={Y_AXIS_OFFSET}>T</ColLabel>
+        <ColLabel active={isActiveDay(release, step, 2)} x={col(2)} y={Y_AXIS_OFFSET}>W</ColLabel>
+        <ColLabel active={isActiveDay(release, step, 3)} x={col(3)} y={Y_AXIS_OFFSET}>T</ColLabel>
+        <ColLabel active={isActiveDay(release, step, 4)} x={col(4)} y={Y_AXIS_OFFSET}>F</ColLabel>
+        <ColLabel active={isActiveDay(release, step, 5)} x={col(5)} y={Y_AXIS_OFFSET}>S</ColLabel>
+        <ColLabel active={isActiveDay(release, step, 6)} x={col(6)} y={Y_AXIS_OFFSET}>S</ColLabel>
+        <ColLabel active={isActiveDay(release, step, 7)} x={col(7)} y={Y_AXIS_OFFSET}>M</ColLabel>
+        <ColLabel active={isActiveDay(release, step, 8)} x={col(8)} y={Y_AXIS_OFFSET}>T</ColLabel>
+      </g>
+      {/* Red Line */}
+      <Line x1={col(0)} y1={row(0)} x2={col(3)} y2={row(3)} color="red" selected={selected} />
+      {/* Purple Lines */}
+      <Line x1={col(1)} y1={row(0)} x2={col(3)} y2={row(2)} color="purple" selected={selected} />
+      <Line x1={col(3)} y1={row(2)} x2={col(7)} y2={row(2)} color="purple" selected={selected} dashed />
+      <Line x1={col(7)} y1={row(2)} x2={col(8)} y2={row(3)} color="purple" selected={selected} />
+      {/* Blue Lines */}
+      <Line x1={col(2)} y1={row(0)} x2={col(4)} y2={row(2)} color="blue" selected={selected}  />
+      <Line x1={col(4)} y1={row(2)} x2={col(7)} y2={row(2)} color="blue" selected={selected} dashed />
+      <Line x1={col(7)} y1={row(2)} x2={col(8)} y2={row(3)} color="blue" selected={selected}  />
+      {/* Green Lines */}
+      <Line x1={col(3)} y1={row(0)} x2={col(4)} y2={row(1)} color="green" selected={selected}  />
+      <Line x1={col(4)} y1={row(1)} x2={col(7)} y2={row(1)} color="green" selected={selected} dashed/>
+      <Line x1={col(7)} y1={row(1)} x2={col(8)} y2={row(2)} color="green" selected={selected} />
+      {/* Animated Dots */}
+      <AnimatedCircle
+        r="18"
+        toggled={selected === 'red'}
+        fillOpacity={selectedOpacity(selected, 'red')}
+        onClick={() => setSelected(selected => selected !== 'red' ? 'red' : 'none')}
+        color="red"
+        x={DAY_STEPS[0].map(col)}
+        y={ENV_STEPS[0].map(row)}
+      />
+      <AnimatedCircle
+        toggled={selected === 'purple'}
+        fillOpacity={selectedOpacity(selected, 'purple')}
+        onClick={() => setSelected(selected => selected !== 'purple' ? 'purple' : 'none')}
+        r="18"
+        color="purple"
+        x={DAY_STEPS[1].map(col)}
+        y={ENV_STEPS[1].map(row)}
+      />
+      <AnimatedCircle
+        toggled={selected === 'blue'}
+        fillOpacity={selectedOpacity(selected, 'blue')}
+        onClick={() => setSelected(selected => selected !== 'blue' ? 'blue' : 'none')}
+        r="18"
+        color="blue"
+        x={DAY_STEPS[2].map(col)}
+        y={ENV_STEPS[2].map(row)}
+      />
+      <AnimatedCircle
+        toggled={selected === 'green'}
+        onClick={() => setSelected(selected => selected !== 'green' ? 'green' : 'none')}
+        fillOpacity={selectedOpacity(selected, 'green')}
+        r="18"
+        color="green" 
+        x={DAY_STEPS[3].map(col)}
+        y={ENV_STEPS[3].map(row)}
+      />
+    </svg>
+  )
+}
+```
+
+</CodeSurfer>
+
+---
+
+<ReleaseSchedule />
+
+---
+
+# Resources
+
+- Slides - [https://mdx-intro.netlify.com/](https://mdx-intro.netlify.com/)
+- [Slide Deck Code](https://github.com/infiniteluke/mdx-deck-intro)
+- [mdx-deck](https://github.com/jxnblk/mdx-deck)
+- [CodeSurfer](https://github.com/pomber/code-surfer)
+- [Copernicus Tech Debt Tech Demo Slides](https://copernicus-ah.netlify.com/)
+- [Components as Data Slides](https://componentsasdata.com/)
+- @luke on slack
+
+---
+
+# 👋 Thanks!

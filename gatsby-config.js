@@ -1,7 +1,5 @@
-require(`dotenv`).config()
-
-const shouldAnalyseBundle = process.env.ANALYSE_BUNDLE
-
+const remarkPlugins = [require("remark-unwrap-images"), require("remark-emoji")]
+const options = require("./default-options")
 module.exports = {
   siteMetadata: {
     siteTitle: `QiangMa's Blog`,
@@ -15,51 +13,59 @@ module.exports = {
   },
   plugins: [
     {
-      resolve: `gatsby-theme-mine`,
-      // See the theme's README for all available options
+      resolve: `gatsby-source-filesystem`,
       options: {
-        postsPath:`${__dirname}/docs/posts`,
-        pagesPath:`${__dirname}/docs/pages`,
-        navigation: [
+        name: options.postsPath,
+        path: options.postsPath,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: options.pagesPath,
+        path: options.pagesPath,
+      },
+    },
+    `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`,
+    "gatsby-plugin-react-helmet",
+    "gatsby-plugin-emotion",
+    "gatsby-plugin-catch-links",
+    "gatsby-plugin-theme-ui",
+    {
+      resolve: `gatsby-plugin-mdx`,
+      options: {
+        remarkPlugins,
+        extensions: [`.mdx`, `.md`],
+        gatsbyRemarkPlugins: [
           {
-            title: `Blog`,
-            slug: `/blog`,
+            resolve: `gatsby-remark-drawio`,
+            options: {
+              src: "/lib/viewer.min.js",
+              highlight: "#00afff",
+              lightbox: false,
+              nav: true,
+              resize: true,
+              toolbar: "pages zoom layers lightbox",
+              baseUrl: "https://cdn.jsdelivr.net/gh/mqjd/assets@latest/",
+            },
           },
-          {
-            title: `About`,
-            slug: `/about`,
-          },
-        ],
-        externalLinks: [
-          {
-            name: `Github`,
-            url: `https://github.com/mqjd`,
-          },
+          `gatsby-remark-import-code`,
         ],
       },
     },
     {
-      resolve: `gatsby-omni-font-loader`,
+      resolve: "gatsby-plugin-compile-es6-packages",
       options: {
-        enableListener: true,
-        preconnect: [`https://fonts.gstatic.com`],
-        interval: 300,
-        timeout: 30000,
-        web: [
-          {
-            name: `IBM Plex Sans`,
-            file: `https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap`,
-          },
-        ],
+        modules: ["@mdx-deck/themes", "gatsby-theme-mdx-deck"],
       },
     },
-    `gatsby-plugin-sitemap`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `minimal-blog - gatsby-theme-mine`,
-        short_name: `minimal-blog`,
-        description: `Typography driven, feature-rich blogging theme with minimal aesthetics. Includes tags/categories support and extensive features for code blocks such as live preview, line numbers, and code highlighting.`,
+        name: `QiangMa's Blog`,
+        short_name: `QiangMa's Blog`,
+        description: `QiangMa's Blog.`,
         start_url: `/`,
         background_color: `#fff`,
         // This will impact how browsers show your PWA/website
@@ -80,63 +86,5 @@ module.exports = {
         ],
       },
     },
-    {
-      resolve: `gatsby-plugin-feed`,
-      options: {
-        query: `
-          {
-            site {
-              siteMetadata {
-                title: siteTitle
-                description: siteDescription
-                siteUrl
-                site_url: siteUrl
-              }
-            }
-          }
-        `,
-        feeds: [
-          {
-            serialize: ({ query: { site, allPost } }) =>
-              allPost.nodes.map(post => {
-                const url = site.siteMetadata.siteUrl + post.slug
-                const content = `<p>${post.excerpt}</p><div style="margin-top: 50px; font-style: italic;"><strong><a href="${url}">Keep reading</a>.</strong></div><br /> <br />`
-
-                return {
-                  title: post.title,
-                  date: post.date,
-                  excerpt: post.excerpt,
-                  url,
-                  guid: url,
-                  custom_elements: [{ "content:encoded": content }],
-                }
-              }),
-            query: `
-              {
-                allPost(sort: { fields: date, order: DESC }) {
-                  nodes {
-                    title
-                    date(formatString: "MMMM D, YYYY")
-                    excerpt
-                    slug
-                  }
-                }
-              }
-            `,
-            output: `rss.xml`,
-            title: `Minimal Blog - gatsby-theme-mine`,
-          },
-        ],
-      },
-    },
-    `gatsby-plugin-gatsby-cloud`,
-    shouldAnalyseBundle && {
-      resolve: `gatsby-plugin-webpack-bundle-analyser-v2`,
-      options: {
-        analyzerMode: `static`,
-        reportFilename: `_bundle.html`,
-        openAnalyzer: false,
-      },
-    },
-  ].filter(Boolean),
+  ],
 }

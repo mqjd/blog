@@ -9,3 +9,8 @@
 ::-webkit-scrollbar-thumb:hover {
   background-color: #bdbdbd;
 }
+
+.cs-layout [data-themeui-nested-provider=true] {
+  height: 100%;
+  width: 100%;
+}
