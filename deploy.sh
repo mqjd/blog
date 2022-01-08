@@ -3,6 +3,9 @@
 # 确保脚本抛出遇到的错误
 set -e
 
+npm audit fix --force
+
+npm install -legacy-peer-deps
 # 生成静态文件
 npm run build 
 
