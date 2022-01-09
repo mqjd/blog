@@ -8,14 +8,14 @@ const DefaultProvider = props =>
   React.createElement(Fragment, null, props.children)
 
 const Wapper =  props => {
-  const [height, setHeight] = useState('100%')
-  const { mode, theme } = useDeck()
+  const { mode, theme, slideStyle } = useDeck()
+  const [height, setHeight] = useState('100vh')
 
   useEffect(() => {
     // handle mobile safari height
-    setHeight('100%')
+    setHeight(slideStyle.height)
     const handleResize = e => {
-      setHeight('100%')
+      setHeight(slideStyle.height)
     }
     const stopTouch = e => {
       if (mode !== modes.normal) return
@@ -27,7 +27,7 @@ const Wapper =  props => {
       window.removeEventListener('resize', handleResize)
       document.body.removeEventListener('touchstart', stopTouch)
     }
-  }, [mode])
+  }, [mode, slideStyle])
 
   const { Provider = DefaultProvider } = theme
 
@@ -36,8 +36,9 @@ const Wapper =  props => {
       <div
         {...props}
         sx={{
+          ...slideStyle,
           width: '100%',
-          height: mode !== modes.print ? height : '100%',
+          height: mode !== modes.print ? height : '100vh',
           variant: 'styles.root',
           '*': {
             boxSizing: 'border-box',

@@ -6,7 +6,7 @@ import useDeck from 'gatsby-theme-mdx-deck/src/hooks/use-deck'
 import useSwipe from 'gatsby-theme-mdx-deck/src/hooks/use-swipe'
 import { modes } from 'gatsby-theme-mdx-deck/src/constants'
 
-export const Slide = ({ slide, index, preview, styles, ...props }) => {
+export const Slide = ({ slide, index, preview, ...props }) => {
   const outer = useDeck()
   const swipeProps = useSwipe()
   const context = {
@@ -21,6 +21,8 @@ export const Slide = ({ slide, index, preview, styles, ...props }) => {
         {...(!preview ? swipeProps : {})}
         sx={{
           boxSizing: 'border-box',
+          width: '100%',
+          height: context.mode === modes.print ? '100vh' : '100%',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
@@ -28,8 +30,7 @@ export const Slide = ({ slide, index, preview, styles, ...props }) => {
           overflow: 'hidden',
           color: 'text',
           bg: 'background',
-          variant: 'styles.Slide',
-          ...styles
+          variant: 'styles.Slide'
         }}>
         {slide}
       </div>

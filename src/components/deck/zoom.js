@@ -19,7 +19,7 @@ export const Zoom = ({ ratio, zoom = 1, ...props }) => (
         right: 0,
         bottom: 0,
         left: 0,
-        bg: 'cyan',
+        background: 'background',
         width: `${(1 / zoom) * 100}%`,
         height: `${(1 / zoom) * 100}%`,
         transformOrigin: '0 0',

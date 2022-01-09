@@ -108,6 +108,7 @@ const Deck = ({
     steps: get(outer, `metadata.${index}.steps`),
     notes: get(outer, `metadata.${index}.notes`),
     theme: mergedTheme,
+    slideStyle
   }
 
   context.maximize = () => {
