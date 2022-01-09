@@ -1,4 +1,8 @@
-const remarkPlugins = [require("remark-unwrap-images"), require("remark-emoji")]
+const remarkPlugins = [
+  require("remark-unwrap-images"),
+  require("remark-emoji"),
+  [require("remark-external-links"), { target: '_blank' }],
+]
 const options = require("./default-options")
 module.exports = {
   siteMetadata: {

@@ -41,6 +41,7 @@
     "mdx-utils": "^0.2.0",
     "prism-react-renderer": "^1.2.1",
     "react-spring": "^9.4.1",
+    "remark-external-links": "8.0.0",
     "styled-components": "^5.0.1",
     "theme-ui": "^0.13.1"
   },
