@@ -16,7 +16,7 @@ cd public
 
 # deploy to github
 githubUrl=https://mqjd:${GITHUB_TOKEN}@github.com/mqjd/mqjd.github.io.git
-codingUrl=https://mqjd:${CODING_TOKEN}@mqjd.coding.net/mqjd/m/mqjd.github.io.git
+codingUrl=https://JshEHrjrhN:${CODING_TOKEN}@mqjd.coding.net/mqjd/m/mqjd.github.io.git
 
 git config --global user.name "mqjd"
 git config --global user.email "1378415278@qq.com"
