@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
+import { invert } from '@theme-ui/color'
 import React from 'react'
 import Zoom from './zoom'
 import Slide from './slide'
@@ -20,7 +21,7 @@ export const Presenter = ({ slides, children }) => {
         height: '100%',
         fontFamily: 'ui',
         color: 'white',
-        bg: 'black',
+        background: invert('background'),
       }}>
       <div
         sx={{

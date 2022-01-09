@@ -1,12 +1,13 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
+import { invert } from '@theme-ui/color'
 import { navigate } from '@reach/router'
 import useDeck from 'gatsby-theme-mdx-deck/src/hooks/use-deck'
 import Zoom from './zoom'
 import SlideList from './slide-list'
 
 const Overview = ({ slides, children }) => {
-  const { slug, index, length } = useDeck()
+  const { slug, index, length, maximize } = useDeck()
 
   return (
     <div
@@ -15,7 +16,7 @@ const Overview = ({ slides, children }) => {
         height: '100%',
         fontFamily: 'ui',
         color: 'white',
-        bg: 'black',
+        background: invert('background'),
       }}>
       <div
         sx={{
@@ -48,7 +49,7 @@ const Overview = ({ slides, children }) => {
           sx={{
             flex: '1 1 auto',
           }}>
-          <Zoom zoom={5 / 6}>{children}</Zoom>
+          <Zoom zoom={maximize ? 5/6 : 1/2}>{children}</Zoom>
         </div>
         <div
           sx={{

@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui'
+import { invert } from '@theme-ui/color'
 import { navigate } from '@reach/router'
 import useDeck from 'gatsby-theme-mdx-deck/src/hooks/use-deck'
 import { modes } from 'gatsby-theme-mdx-deck/src/constants'
@@ -12,7 +13,7 @@ const Grid = ({ slides }) => {
       sx={{
         minHeight: '100%',
         color: 'white',
-        bg: 'black',
+        background: invert('background'),
       }}>
       <div
         sx={{
