@@ -7,7 +7,9 @@ npm install -legacy-peer-deps
 npm install --force
 
 # 生成静态文件
-npm run build 
+npm run build
+
+bash ./optimize.sh
 
 # 进入生成的文件夹
 cd public
