@@ -7,15 +7,33 @@ import { modes } from 'gatsby-theme-mdx-deck/src/constants'
 const DefaultProvider = props =>
   React.createElement(Fragment, null, props.children)
 
+const wapperStyle = maximize => {
+  if (maximize) {
+    return {
+      position: "fixed",
+      top: "0px",
+      left: "0px",
+      width : '100vw',
+      height : '100vh'
+    }
+  } else {
+    return {
+      width: "100%",
+      height: "60vh",
+      position: "relative"
+    }
+  }
+}
+
 const Wapper =  props => {
-  const { mode, theme, slideStyle } = useDeck()
+  const { mode, theme, maximize } = useDeck()
   const [height, setHeight] = useState('100vh')
 
   useEffect(() => {
     // handle mobile safari height
-    setHeight(slideStyle.height)
+    setHeight(window.innerHeight)
     const handleResize = e => {
-      setHeight(slideStyle.height)
+      setHeight(window.innerHeight)
     }
     const stopTouch = e => {
       if (mode !== modes.normal) return
@@ -27,7 +45,7 @@ const Wapper =  props => {
       window.removeEventListener('resize', handleResize)
       document.body.removeEventListener('touchstart', stopTouch)
     }
-  }, [mode, slideStyle])
+  }, [mode])
 
   const { Provider = DefaultProvider } = theme
 
@@ -36,9 +54,9 @@ const Wapper =  props => {
       <div
         {...props}
         sx={{
-          ...slideStyle,
           width: '100%',
           height: mode !== modes.print ? height : '100vh',
+          ...wapperStyle(maximize),
           variant: 'styles.root',
           '*': {
             boxSizing: 'border-box',

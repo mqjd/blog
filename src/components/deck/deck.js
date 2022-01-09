@@ -71,21 +71,6 @@ const mergeThemes = (...themes) =>
 
 const DefaultMode = ({ children }) => <React.Fragment children={children} />
 
-const deckMode = {
-  inline: {
-    width: "100%",
-    height: "60vh",
-    position: "relative"
-  },
-  maximize: {
-    position: "fixed",
-    top: "0px",
-    left: "0px",
-    width : '100vw',
-    height : '100vh'
-  }
-}
-
 const Deck = ({
   slides = [],
   pageContext: { title, slug },
@@ -95,7 +80,7 @@ const Deck = ({
 }) => {
   const outer = useDeck()
   const index = getIndex()
-  const [slideStyle, setSlideStyle] = React.useState(deckMode.inline)
+  const [maximize, setMaximize] = React.useState(false)
   const head = slides.head.children
 
   const { components, ...mergedTheme } = mergeThemes(theme, ...themes)
@@ -103,16 +88,16 @@ const Deck = ({
   const context = {
     ...outer,
     slug,
+    maximize,
     length: slides.length,
     index,
     steps: get(outer, `metadata.${index}.steps`),
     notes: get(outer, `metadata.${index}.notes`),
     theme: mergedTheme,
-    slideStyle
   }
 
-  context.maximize = () => {
-    setSlideStyle(slideStyle.position === "fixed" ? deckMode.inline : deckMode.maximize);
+  context.setMaximize = () => {
+    setMaximize(!maximize);
   }
 
   let Mode = DefaultMode
@@ -156,9 +141,9 @@ const Deck = ({
                 style={{
                   height: '100%',
                 }}>
-                <Slide index={0} path="/" styles={slideStyle} slide={slides[0]} />
+                <Slide index={0} path="/" slide={slides[0]} />
                 {slides.map((slide, i) => (
-                  <Slide key={i} styles={slideStyle} index={i} path={i + '/*'} slide={slide} />
+                  <Slide key={i} index={i} path={i + '/*'} slide={slide} />
                 ))}
                 <Print path="/print" slides={slides} />
               </Router>

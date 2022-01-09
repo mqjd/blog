@@ -14,7 +14,7 @@ export const SlideList = ({
   onClick = noop,
   ...props
 }) => {
-  const { index } = useDeck()
+  const { index, maximize } = useDeck()
   const thumb = useRef(null)
 
   useEffect(() => {
@@ -45,9 +45,10 @@ export const SlideList = ({
               : null
           }
           sx={{
-            m: 2,
+            m: maximize ? 2 : 0,
+            mb: maximize ? 2 : 10,
             cursor: 'pointer',
-            outline: index === i ? `4px solid cyan` : null,
+            outline: maximize && index === i ? `4px solid cyan` : null,
           }}>
           <Zoom zoom={zoom} ratio={ratio}>
             <Slide slide={slide} preview />
