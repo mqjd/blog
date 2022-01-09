@@ -40,13 +40,6 @@ const theme = merge(tailwind, {
     heading: 700,
     bold: 700,
   },
-  text: {
-    heading: {
-      fontFamily: 'heading',
-      lineHeight: 'heading',
-      fontWeight: 'heading',
-    },
-  },
   layout: {
     container: {
       padding: [3, 4],
