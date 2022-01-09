@@ -5,7 +5,7 @@ set -e
 
 asserts=$(find public -type f|grep -v .html)
 htmls=$(find public -type f|grep .html)
-bashPath="https://cdn.jsdelivr.net/gh/mqjd/mqjd.github.io/"
+bashPath="https://mqjd.coding.net/p/m/d/mqjd.github.io/git/raw/master/"
 
 for html in $htmls
 do
