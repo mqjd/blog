@@ -47,7 +47,7 @@ export const SlideList = ({
           sx={{
             m: maximize ? 2 : 0,
             mb: maximize ? 2 : 10,
-            cursor: 'pointer',
+            cursor: maximize ? 'pointer' : 'auto',
             outline: maximize && index === i ? `4px solid cyan` : null,
           }}>
           <Zoom zoom={zoom} ratio={ratio}>
