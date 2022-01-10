@@ -51,7 +51,7 @@ module.exports = {
               nav: true,
               resize: true,
               toolbar: "pages zoom layers lightbox",
-              baseUrl: "https://cdn.jsdelivr.net/gh/mqjd/assets@latest/",
+              baseUrl: "https://mqjd.coding.net/p/m/d/assets/git/raw/master/",
             },
           },
           `gatsby-remark-import-code`,

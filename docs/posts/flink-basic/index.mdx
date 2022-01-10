@@ -11,7 +11,7 @@ tags:
 ## [Flink 基本概念](https://t.hk.uy/aDBj)
 
 Apache Flink 是一个框架和分布式处理引擎，用于在无边界和有边界数据流上进行有状态的计算。Flink 能在所有常见集群环境中运行，并能以内存速度和任意规模进行计算。
-![总体](https://cdn.jsdelivr.net/gh/mqjd/assets/imgs/img/flink_home_graphic.png)
+![总体](https://mqjd.coding.net/p/m/d/assets/git/raw/master//imgs/img/flink_home_graphic.png)
 
 ## 名词介绍
 
@@ -54,7 +54,7 @@ Apache Flink 是一个框架和分布式处理引擎，用于在无边界和有�
 - 无界流(Unbounded)
 有定义流的开始，也有定义流的结束。有界流可以在摄取所有数据后再进行计算。有界流所有数据可以被排序，所以并不需要有序摄取。有界流处理通常被称为批处理
 
-![流](https://cdn.jsdelivr.net/gh/mqjd/assets/imgs/img/flink_bounded_unbounded.png)
+![流](https://mqjd.coding.net/p/m/d/assets/git/raw/master//imgs/img/flink_bounded_unbounded.png)
 
 ## 数据流编程模型
 
@@ -87,13 +87,13 @@ Apache Flink 是一个框架和分布式处理引擎，用于在无边界和有�
 
 是事件进入Flink的时间。 在Source算子处产生，也就是在Source处获取到这个数据的时间，Ingestion Time在概念上位于Event Time和Processing Time之间。在Source处获取数据的时间,不受Flink分布式系统内部处理Event的先后顺序和数据传输的影响，相对稳定一些，但是Ingestion Time和Processing Time一样，不能准确地反应数据发生的时间序列情况。
 
-![时间](https://cdn.jsdelivr.net/gh/mqjd/assets/imgs/img/flink_time.jpg)
+![时间](https://mqjd.coding.net/p/m/d/assets/git/raw/master//imgs/img/flink_time.jpg)
 
 ### Watermarks
 
 Flink实际上是用 Watermarks 来实现Event – Time 的功能。Watermarks 在Flink 中也属于特殊事件，其精髓在于当某个运算值收到带有时间戳“ T ”的 Watermarks 时就意味着它不会接收到新的数据了。使用Watermarks 的好处在于可以准确预估收到数据的截止时间。举例，假设预期收到数据时间与输出结果时间的时间差延迟5 分钟，那么Flink 中所有的 Windows Operator 搜索3 点至4 点的数据，但因为存在延迟需要再多等5分钟直至收集完4：05 分的数据，此时方能判定4 点钟的资料收集完成了，然后才会产出3 点至4 点的数据结果。这个时间段的结果对应的就是 Watermarks 的部分。
 
-![img](https://cdn.jsdelivr.net/gh/mqjd/assets/imgs/img/flink_watermark.jpg)
+![img](https://mqjd.coding.net/p/m/d/assets/git/raw/master//imgs/img/flink_watermark.jpg)
 
 ## Window
 
@@ -101,19 +101,19 @@ Flink实际上是用 Watermarks 来实现Event – Time 的功能。Watermarks �
 
 Apache Flink（以下简称 Flink） 是一个天然支持无限流数据处理的分布式计算框架，在 Flink 中 Window 可以将无限流切分成有限流，是处理有限流的核心组件，现在 Flink 中 Window 可以是时间驱动的（Time Window），也可以是数据驱动的（Count Window）。下面的代码是在 Flink 中使用 Window 的两个示例
 
-![img](https://cdn.jsdelivr.net/gh/mqjd/assets/imgs/img/flink_keyed_window.jpg)
+![img](https://mqjd.coding.net/p/m/d/assets/git/raw/master//imgs/img/flink_keyed_window.jpg)
 
-![img](https://cdn.jsdelivr.net/gh/mqjd/assets/imgs/img/flink_none_keyed_window.jpg)
+![img](https://mqjd.coding.net/p/m/d/assets/git/raw/master//imgs/img/flink_none_keyed_window.jpg)
 
 ## Runtime架构
 
 Flink 是可以运行在多种不同的环境中的，例如，它可以通过单进程多线程的方式直接运行，从而提供调试的能力。它也可以运行在 Yarn 或者 K8S 这种资源管理系统上面，也可以在各种云环境中执行。针对不同的执行环境，Flink 提供了一套统一的分布式作业执行引擎，也就是 Flink Runtime 这层。Flink 在 Runtime 层之上提供了 DataStream 和 DataSet 两套 API，分别用来编写流作业与批作业，以及一组更高级的 API 来简化特定作业的编写
 
-![img](https://cdn.jsdelivr.net/gh/mqjd/assets/imgs/img/flink_stack.png)
+![img](https://mqjd.coding.net/p/m/d/assets/git/raw/master//imgs/img/flink_stack.png)
 
 Flink Runtime 层的主要架构如下图所示，整体来说，它采用了标准 master-slave 的结构，其中左侧白色圈中的部分即是 master，它负责管理整个集群中的资源和作业；而右侧的两个 TaskExecutor 则是 Slave，负责提供具体的资源并实际执行作业。
 
-![img](https://cdn.jsdelivr.net/gh/mqjd/assets/imgs/img/flink_runtime.png)
+![img](https://mqjd.coding.net/p/m/d/assets/git/raw/master//imgs/img/flink_runtime.png)
 
 其中，Master 部分又包含了三个组件，即 Dispatcher、ResourceManager 和 JobManager。其中，Dispatcher 负责接收用户提供的作业，并且负责为这个新提交的作业拉起一个新的 JobManager 组件。ResourceManager 负责资源的管理，在整个 Flink 集群中只有一个 ResourceManager。JobManager 负责管理作业的执行，在一个 Flink 集群中可能有多个作业同时执行，每个作业都有自己的 JobManager 组件。这三个组件都包含在 AppMaster 进程中。
 
@@ -125,13 +125,13 @@ TaskExecutor 收到 JobManager 提交的 Task 之后，会启动一个新的线�
 
 以上就是 Flink Runtime 层执行作业的基本流程。可以看出，Flink 支持两种不同的模式，即 Per-job 模式与 Session 模式。如图 3 所示，Per-job 模式下整个 Flink 集群只执行单个作业，即每个作业会独享 Dispatcher 和 ResourceManager 组件。此外，Per-job 模式下 AppMaster 和 TaskExecutor 都是按需申请的。因此，Per-job 模式更适合运行执行时间较长的大作业，这些作业对稳定性要求较高，并且对申请资源的时间不敏感。与之对应，在 Session 模式下，Flink 预先启动 AppMaster 以及一组 TaskExecutor，然后在整个集群的生命周期中会执行多个作业。可以看出，Session 模式更适合规模小，执行时间短的作业。
 
-![img](https://cdn.jsdelivr.net/gh/mqjd/assets/imgs/svg/flink_processes.svg)
+![img](https://mqjd.coding.net/p/m/d/assets/git/raw/master//imgs/svg/flink_processes.svg)
 
 ## Transformation
 
 Transformation操作将1个或多个DataStream转换为新的DataStream，多个转换组合成复杂的数据流拓扑，如下图所示，DataStream会由不同的Transformation操作、转换、过滤、聚合成其他不同的流，从而完成业务要求；
 
-![](https://cdn.jsdelivr.net/gh/mqjd/assets/imgs/img/flink_stream_api_transform.png)
+![](https://mqjd.coding.net/p/m/d/assets/git/raw/master//imgs/img/flink_stream_api_transform.png)
 
 ## Shuffle 机制
 
@@ -155,5 +155,5 @@ ExecutionGraph ： JobManager 根据 JobGraph 生成 ExecutionGraph 。 Executio
 物理执行图：JobManager 根据 ExecutionGraph 对 Job 进行调度后，在各个TaskManager 上部署 Task 后形成的“图”，并不是一个具体的数据结构。
 
 
-![API](https://cdn.jsdelivr.net/gh/mqjd/assets/imgs/img/flink_graph.png)
+![API](https://mqjd.coding.net/p/m/d/assets/git/raw/master//imgs/img/flink_graph.png)
 
