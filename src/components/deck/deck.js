@@ -54,6 +54,11 @@ const getIndex = () => {
   return index
 }
 
+const getQueryParameters = () => {
+  const { search } = globalHistory.location
+  return Object.fromEntries(new URLSearchParams(search))
+}
+
 const GoogleFont = ({ theme }) => {
   if (!theme.googleFont) return false
   return (
@@ -124,7 +129,8 @@ const Deck = ({
 }) => {
   const outer = useDeck()
   const index = getIndex()
-  const [maximize, setMaximize] = React.useState(false)
+  const parameters = getQueryParameters();
+  const [maximize, setMaximize] = React.useState(parameters.hasOwnProperty("maximize") || false)
   const head = slides.head.children
 
   const { components, ...mergedTheme } = mergeThemes(theme, ...themes)
