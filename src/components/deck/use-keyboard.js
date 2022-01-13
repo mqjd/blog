@@ -79,7 +79,7 @@ export const useKeyboard = () => {
             previous(context)
             break
           case keys.esc:
-            context.setState({ mode: modes.normal })
+            context.setState({ mode: modes.normal})
             break
           case keys.maximize:
             context.setMaximize()

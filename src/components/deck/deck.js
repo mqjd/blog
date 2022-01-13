@@ -14,7 +14,7 @@ import Context from 'gatsby-theme-mdx-deck/src/context'
 import Wrapper from './wrapper'
 import Slide from './slide'
 import { modes } from 'gatsby-theme-mdx-deck/src/constants'
-
+import Zoom from './zoom'
 import Presenter from './presenter'
 import Overview from './overview'
 import Grid from './grid'
@@ -69,7 +69,14 @@ const mergeThemes = (...themes) =>
     {}
   )
 
-const DefaultMode = ({ children }) => <React.Fragment children={children} />
+const DefaultMode = ({ children }) => {
+  const { maximize } = useDeck()
+  return (
+    <Zoom zoom={ maximize ? 1 : 3/5} ratio={16 / 9}>
+      <React.Fragment children={children} />
+    </Zoom>
+  )
+}
 
 const Deck = ({
   slides = [],
