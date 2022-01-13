@@ -18,3 +18,11 @@
   height: 100%;
   width: 100%;
 }
+
+.full-screen-button:hover svg{
+  display: inline;
+}
+
+.full-screen-button svg{
+  display: none;
+}
