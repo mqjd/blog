@@ -81,14 +81,14 @@ const FullScreen = ({maximize}) => {
     }}
     >
       { maximize ? (
-        <svg width="20" height="20" viewBox="0 0 1024 1024">
+        <svg viewBox="0 0 1024 1024">
           <path sx={{fill: invert('background')}} d="M786.752 877.248 933.504 1024 1024 933.504 877.248 786.752 1024 640 640 640 640 1024Z" ></path>
           <path sx={{fill: invert('background')}} d="M0 384 384 384 384 0 237.248 146.752 92 1.376 1.504 91.872 146.752 237.248Z" ></path>
           <path sx={{fill: invert('background')}} d="M0 933.504 90.496 1024 237.248 877.248 384 1024 384 640 0 640 146.752 786.752Z" ></path>
           <path sx={{fill: invert('background')}} d="M640 384 1024 384 877.248 237.248 1022.752 91.872 932.256 1.376 786.752 146.752 640 0Z" ></path>
         </svg>
       ) : (
-        <svg  width="20" height="20" viewBox="0 0 1024 1024">
+        <svg viewBox="0 0 1024 1024">
           <path sx={{fill: invert('background')}} d="M877.248 786.752 730.496 640 640 730.496 786.752 877.248 640 1024 1024 1024 1024 640Z"></path>
           <path sx={{fill: invert('background')}} d="M384 0 0 0 0 384 146.752 237.248 292 382.496 382.496 292 237.248 146.752Z"></path>
           <path sx={{fill: invert('background')}} d="M384 730.496 293.504 640 146.752 786.752 0 640 0 1024 384 1024 237.248 877.248Z"></path>
