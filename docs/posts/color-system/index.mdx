@@ -8,125 +8,17 @@ tags:
 import { tailwind } from "@theme-ui/presets"
 import materialColors from "./material-colors"
 import copyToClipboard from "./copy-to-clipboard"
+import {TailwindColorGrid, MaterialColorGrid} from "./color-grid"
 import { Message } from 'theme-ui'
 
 
-<Message sx={{background: 'background', borderLeftWidth: '0.5em'}}>点击色块可以将颜色复制到剪切板</Message>
+<Message sx={{background: 'background', borderLeftWidth: '0.5em', color: '#f44336'}}>点击色块可以将颜色复制到剪切板</Message>
 
 ## All [Theme-UI Tailwind](https://theme-ui.com/demo/) Color
 
-<div
-    style={{
-        width:'100%',
-        display: "grid",
-        gridGap: "10px 10px"
-    }}
->
-{
-    Object.keys(tailwind.colors)
-    .map(v =>{ return { key: v, value: tailwind.colors[v] } })
-    .filter(item => Array.isArray(item.value))
-    .map(item => (
-        <div
-            style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fill, 5em)",
-                gridTemplateRows: "repeat(auto-fill, 8em)",
-                gridGap: "10px 10px"
-            }}
-            key={item.key}
-        >
-            <div
-                key={item.key}
-                style={{
-                    color: 'white',
-                    backgroundColor: item.value[6],
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center'
-                }}
-            >
-            {item.key}
-            </div>
-            {
-                item.value
-                .filter(v => v)
-                .map((color, index)=> (
-                    <div
-                        key={color}
-                        onClick={() => copyToClipboard(color)}
-                        style={{
-                            textAlign: 'center',
-                            cursor: 'pointer'
-                        }}
-                    >
-                        <div style={{height: '5em', backgroundColor: color, textAlign: 'center', lineHeight: '5em'}} ></div>
-                        {`${item.key}[${index + 1}]`}
-                    </div>
-                ))
-            }
-        </div>
-    ))
-}
-</div>
+
+<TailwindColorGrid />
 
 ## All [Material Colors](https://materialui.co/colors/)
 
-<div
-    style={{
-        width:'100%',
-        display: "grid",
-        gridGap: "10px 10px"
-    }}
->
-{
-    Object.keys(materialColors)
-    .map(v => {
-        return {
-            key: v,
-            value: Object.keys(materialColors[v]).map(color => { return { key: color, value: materialColors[v][color] }})
-        }
-    })
-    .map(item => (
-        <div
-            style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fill, 5em)",
-                gridTemplateRows: "repeat(auto-fill, 8em)",
-                gridGap: "10px 10px"
-            }}
-            key={item.key}
-        >
-            <div
-                key={item.key}
-                style={{
-                    color: 'white',
-                    backgroundColor: item.value[6].value,
-                    gridRow: 'span 2',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center'
-                }}
-            >
-            {item.key}
-            </div>
-            {
-                item.value
-                .map(({key, value})=> (
-                    <div
-                        key={key}
-                        onClick={() => copyToClipboard(value)}
-                        style={{
-                            textAlign: 'center',
-                            cursor: 'pointer'
-                        }}
-                    >
-                        <div style={{height: '5em', backgroundColor: value, textAlign: 'center', lineHeight: '5em'}} ></div>
-                        {key}
-                    </div>
-                ))
-            }
-        </div>
-    ))
-}
-</div>
+<MaterialColorGrid />
