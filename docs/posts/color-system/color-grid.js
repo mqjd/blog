@@ -73,7 +73,7 @@ export const TailwindColorGrid = () => {
         default: tailwind.colors[v][5],
         values: tailwind.colors[v].map((item, index) => {
           return {
-            key: `${v}[${index + 1}]`,
+            key: `${v}[${index}]`,
             value: item,
           }
         }),
