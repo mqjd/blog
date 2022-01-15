@@ -7,9 +7,7 @@ const ColorGrid = ({ colorsArray }) => {
   return (
     <div
       style={{
-        width: "100%",
-        display: "grid",
-        gridGap: "10px 10px",
+        width: "100%"
       }}
     >
       {colorsArray.map(colors => {
@@ -17,6 +15,7 @@ const ColorGrid = ({ colorsArray }) => {
           <div
             style={{
               display: "grid",
+              marginTop: "10px",
               gridTemplateColumns: "repeat(auto-fill, 5em)",
               gridTemplateRows: "repeat(auto-fill, 8em)",
               gridColumnGap: "10px",
