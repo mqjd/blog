@@ -28,7 +28,7 @@ const ColorGrid = ({ colorsArray }) => {
               style={{
                 color: "white",
                 backgroundColor: colors.default,
-                gridRow: "span 2",
+                gridRow: "span 10",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
