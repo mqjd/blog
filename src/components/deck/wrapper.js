@@ -7,27 +7,9 @@ import { modes } from 'gatsby-theme-mdx-deck/src/constants'
 const DefaultProvider = props =>
   React.createElement(Fragment, null, props.children)
 
-const wapperStyle = maximize => {
-  if (maximize) {
-    return {
-      position: "fixed",
-      top: "0px",
-      left: "0px",
-      width : '100vw',
-      height : '100vh'
-    }
-  } else {
-    return {
-      width: "100%",
-      height: "60vh",
-      position: "relative"
-    }
-  }
-}
-
-const Wapper =  props => {
-  const { mode, theme, maximize } = useDeck()
+export default props => {
   const [height, setHeight] = useState('100vh')
+  const { mode, theme } = useDeck()
 
   useEffect(() => {
     // handle mobile safari height
@@ -55,8 +37,7 @@ const Wapper =  props => {
         {...props}
         sx={{
           width: '100%',
-          height: mode !== modes.print ? height : '100vh',
-          ...wapperStyle(maximize),
+          height: mode !== modes.print ? '100%' : '100vh',
           variant: 'styles.root',
           '*': {
             boxSizing: 'border-box',
@@ -66,5 +47,3 @@ const Wapper =  props => {
     </Provider>
   )
 }
-
-export default Wapper

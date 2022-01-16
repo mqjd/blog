@@ -1,5 +1,3 @@
-/** @jsx jsx */
-import { jsx } from "theme-ui"
 import React from 'react'
 import useSteps from 'gatsby-theme-mdx-deck/src/hooks/use-steps'
 

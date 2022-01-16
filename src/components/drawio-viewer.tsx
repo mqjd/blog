@@ -1,3 +1,5 @@
+/** @jsx jsx */
+import { jsx } from 'theme-ui'
 import React from 'react'
 import { useSteps, useDeck } from 'mdx-deck'
 
@@ -49,18 +51,22 @@ const resoveValue = (value: any) => {
     return value;
 }
 
-const isDeckMode = (context: any) => {
-    return context.slug !== undefined;
+const isDeckMode = (slug) => {
+    return slug !== undefined;
 }
 
 const style = {
-    minWidth: "100px",
+    width: "100%",
+    height: "100%",
+    maxHeight:'100%',
+    maxWidth:'100%',
     overflow: "hidden"
 }
 
 const DrawioViewer = ( prop: Props) => {
     const [graphView, setGraphView] = React.useState<any>();
-    const inDeck = isDeckMode(useDeck());
+    const {index, slug } = useDeck();
+    const inDeck = isDeckMode(slug);
     const defaultProps = {
         toolbar: inDeck ? null : prop.toolbar || null,
         "auto-fit": true
@@ -70,17 +76,22 @@ const DrawioViewer = ( prop: Props) => {
         const step = useSteps(params.steps - 1)
         React.useEffect(() => {
             graphView && step !== graphView.currentPage && graphView.selectPage(step)
-        }, [step, graphView])
+        }, [step])
     }
     const container = React.useRef()
-    React.useEffect(() => {
-        let win: any = window;
-        const element = container.current
-        win.GraphViewer.getUrl(prop.url, function (e) {
-            setGraphView(new win.GraphViewer(element, win.mxUtils.parseXml(e).documentElement, {...prop, ...defaultProps, ...params}));
-        });
-    }, [prop.url])
-    return <div style={style}><div style={{height: "100%"}} ref={container}></div></div>
+    const initDrawioViewer = () => {
+        return new Promise((resolve, reject) => {
+            let win: any = window;
+            win.GraphViewer.getUrl(prop.url, function (e) {
+                resolve(new win.GraphViewer(container.current, win.mxUtils.parseXml(e).documentElement, {...prop, ...defaultProps, ...params}));
+            });
+        })
+
+    }
+    React.useEffect(() => { 
+        initDrawioViewer().then(v => setGraphView(v))
+    }, [index])
+    return <React.StrictMode><div style={style}><div style={{height: "100%", width: "100%"}} ref={container}></div></div></React.StrictMode>
 }
 
 export default DrawioViewer

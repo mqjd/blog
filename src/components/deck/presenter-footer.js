@@ -6,7 +6,7 @@ import useDeck from 'gatsby-theme-mdx-deck/src/hooks/use-deck'
 import Clock from './clock'
 import Timer from './timer'
 
-const PresenterFooter = props => {
+export default props => {
   const context = useDeck()
   const { index, length } = context
 
@@ -45,5 +45,3 @@ const PresenterFooter = props => {
     </React.Fragment>
   )
 }
-
-export default PresenterFooter

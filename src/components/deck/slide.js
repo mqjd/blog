@@ -28,9 +28,10 @@ export const Slide = ({ slide, index, preview, ...props }) => {
           alignItems: 'center',
           justifyContent: 'center',
           overflow: 'hidden',
+          position: 'relative',
           color: 'text',
-          bg: 'background',
-          variant: 'styles.Slide'
+          background: 'background',
+          variant: 'styles.Slide',
         }}>
         {slide}
       </div>
