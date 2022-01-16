@@ -1,0 +1,150 @@
+---
+title: Git Operators
+date: 2022-01-16 20:14:44
+slug: "/git"
+tags:
+  - Git
+  - ShortCut
+---
+
+## 基础
+
+- 设置用户与邮箱
+
+  ``` shell
+  git config --global user.name "John Doe"
+  git config --global user.email johndoe@example.com
+  ```
+
+- 初始化仓库
+
+  ``` shell
+  mkdir test
+  cd test
+  git init
+  ```
+
+- 状态
+
+  ``` shell
+  git status
+  ```
+
+- 添加文件到提交列表
+
+  ``` shell
+  # 添加单个文件
+  git add file.txt
+  # 添加目录
+  git add dir
+  # 添加一类
+  git add *.js
+  # 添加所有
+  git add .
+  ```
+
+- 从提交列表删除
+
+  ``` shell
+  # 删除单个文件
+  git reset file.txt
+  # 删除目录
+  git reset dir
+  # 删除一类
+  git reset *.js
+  # 删除所有
+  git reset .
+  ```
+
+- 文件撤销更改
+
+  ``` shell
+  # 撤销单个文件
+  git checkout -- file.txt
+  # 撤销所有
+  git checkout .
+  ```
+
+## 日志
+
+- 常用
+
+  ``` shell
+  git log --graph --pretty=format:'%h - %s (%an, %cd)' --date iso -n 5
+  # 显示效果如下
+  * 98c6d27 - add image (mqjd, 2022-01-16 21:40:25 +0800)
+  * 614339a - add image (mqjd, 2022-01-16 16:36:45 +0800)
+  * e6b63c0 - add image (mqjd, 2022-01-16 16:21:51 +0800)
+  * aa5df3b - add image (mqjd, 2022-01-15 21:50:53 +0800)
+  * 9132436 - add image (mqjd, 2022-01-15 21:45:00 +0800)
+  ```
+
+- git log --pretty=format 常用的选项
+
+  | 选项  | 说明                                          |
+  | :---- | :-------------------------------------------- |
+  | `%H`  | 提交的完整哈希值                              |
+  | `%h`  | 提交的简写哈希值                              |
+  | `%T`  | 树的完整哈希值                                |
+  | `%t`  | 树的简写哈希值                                |
+  | `%P`  | 父提交的完整哈希值                            |
+  | `%p`  | 父提交的简写哈希值                            |
+  | `%an` | 作者名字                                      |
+  | `%ae` | 作者的电子邮件地址                            |
+  | `%ad` | 作者修订日期（可以用 --date=选项 来定制格式） |
+  | `%ar` | 作者修订日期，按多久以前的方式显示            |
+  | `%cn` | 提交者的名字                                  |
+  | `%ce` | 提交者的电子邮件地址                          |
+  | `%cd` | 提交日期                                      |
+  | `%cr` | 提交日期（距今多长时间）                      |
+  | `%s`  | 提交说明                                      |
+
+- git log 的常用选项
+
+  | 选项              | 说明                                                         |
+  | :---------------- | :----------------------------------------------------------- |
+  | `-p`              | 按补丁格式显示每个提交引入的差异。                           |
+  | `--stat`          | 显示每次提交的文件修改统计信息。                             |
+  | `--shortstat`     | 只显示 --stat 中最后的行数修改添加移除统计。                 |
+  | `--name-only`     | 仅在提交信息后显示已修改的文件清单。                         |
+  | `--name-status`   | 显示新增、修改、删除的文件清单。                             |
+  | `--abbrev-commit` | 仅显示 SHA-1 校验和所有 40 个字符中的前几个字符。            |
+  | `--relative-date` | 使用较短的相对时间而不是完整格式显示日期（比如“2 weeks ago”）。 |
+  | `--graph`         | 在日志旁以 ASCII 图形显示分支与合并历史。                    |
+  | `--pretty`        | 使用其他格式显示历史提交信息。可用的选项包括 oneline、short、full、fuller 和 format（用来定义自己的格式）。 |
+  | `--oneline`       | `--pretty=oneline --abbrev-commit` 合用的简写。              |
+
+- 限制 git log 输出的选项
+
+  | 选项                  | 说明                                       |
+  | :-------------------- | :----------------------------------------- |
+  | `-<n>`                | 仅显示最近的 n 条提交。                    |
+  | `--since`, `--after`  | 仅显示指定时间之后的提交。                 |
+  | `--until`, `--before` | 仅显示指定时间之前的提交。                 |
+  | `--author`            | 仅显示作者匹配指定字符串的提交。           |
+  | `--committer`         | 仅显示提交者匹配指定字符串的提交。         |
+  | `--grep`              | 仅显示提交说明中包含指定字符串的提交。     |
+  | `-S`                  | 仅显示添加或删除内容匹配指定字符串的提交。 |
+
+## 代理
+
+- 设置代理
+
+  ``` shell
+  git config --global http.proxy socks5://127.0.0.1:1080
+  git config --global https.proxy socks5://127.0.0.1:1080
+  ```
+
+- 查看代理
+
+  ``` shell
+  git config --get http.proxy
+  git config --get https.proxy
+  ```
+
+- 删除代理
+
+  ``` shell
+  git config --unset http.proxy
+  git config --unset https.proxy
+  ```
