@@ -7,7 +7,7 @@ git config --global user.name "mqjd"
 git config --global user.email "1378415278@qq.com"
 
 githubUrl=https://mqjd:${GITHUB_TOKEN}@github.com/mqjd/mqjd.github.io.git
-giteeUrl=https://MQJD:${GITEE_TOKEN}@gitee.com/MQJD/mqjd.git master
+giteeUrl=https://MQJD:${GITEE_TOKEN}@gitee.com/MQJD/mqjd.git
 # codingUrl=htps://JshEHrjrhN:${CODING_TOKEN}@mqjd.coding.net/mqjd/m/blog.git
 
 npm install -legacy-peer-deps
