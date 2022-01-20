@@ -18,9 +18,7 @@ export const Presenter = ({ slides, children }) => {
         flexDirection: 'column',
         justifyContent: 'space-between',
         height: '100vh',
-        fontFamily: 'ui',
-        color: 'white',
-        bg: 'black',
+        fontFamily: 'ui'
       }}>
       <div
         sx={{

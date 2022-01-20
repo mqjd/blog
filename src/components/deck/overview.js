@@ -14,8 +14,7 @@ export default ({ slides, children }) => {
         display: 'flex',
         height: '100vh',
         fontFamily: 'ui',
-        color: 'white',
-        bg: 'black',
+        color: 'white'
       }}>
       <div
         sx={{

@@ -6,13 +6,11 @@ import { modes } from 'gatsby-theme-mdx-deck/src/constants'
 import SlideList from './slide-list'
 
 export default ({ slides }) => {
-  const { slug, setState } = useDeck()
+  const { slug, setState, maximize } = useDeck()
   return (
     <div
       sx={{
-        minHeight: '100vh',
-        color: 'white',
-        bg: 'black',
+        minHeight: '100vh'
       }}>
       <div
         sx={{
@@ -25,9 +23,11 @@ export default ({ slides }) => {
             navigate([slug, i].join('/'))
             setState({ mode: modes.normal })
           }}
+          zoom={ maximize ? 1/4: 3/5 }
           sx={{
-            width: '25%',
+            width: maximize ? '25%': '100%',
             m: 0,
+            mb: maximize ? 0 : '1em',
           }}
         />
       </div>

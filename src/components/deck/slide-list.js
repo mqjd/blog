@@ -4,6 +4,7 @@ import React, { useEffect, useRef } from 'react'
 import Zoom from './zoom'
 import Slide from './slide'
 import useDeck from 'gatsby-theme-mdx-deck/src/hooks/use-deck'
+import { modes } from 'gatsby-theme-mdx-deck/src/constants'
 
 const noop = () => {}
 
@@ -14,9 +15,9 @@ export const SlideList = ({
   onClick = noop,
   ...props
 }) => {
-  const { index } = useDeck()
+  const { index, maximize, mode } = useDeck()
   const thumb = useRef(null)
-
+  const operateAble = maximize || mode !== modes.grid
   useEffect(() => {
     const el = thumb.current
     if (!el) return
@@ -34,7 +35,7 @@ export const SlideList = ({
           role="link"
           ref={i === index ? thumb : null}
           onClick={e => {
-            onClick(i)
+            operateAble && onClick(i)
           }}
           style={
             index === i
@@ -46,8 +47,8 @@ export const SlideList = ({
           }
           sx={{
             m: 2,
-            cursor: 'pointer',
-            outline: index === i ? `4px solid #ff9800` : null,
+            cursor: operateAble ? 'pointer' : 'auto',
+            outline: operateAble ? (index === i ? `4px solid #ff9800` : null) : null,
           }}>
           <Zoom zoom={zoom} ratio={ratio}>
             <Slide slide={slide} preview />

@@ -3,7 +3,8 @@ import { jsx } from "theme-ui"
 import React from "react"
 import Zoom from "./zoom"
 import useDeck from 'gatsby-theme-mdx-deck/src/hooks/use-deck'
-import { invert } from '@theme-ui/color'
+import { modes } from 'gatsby-theme-mdx-deck/src/constants'
+import { hue, invert } from '@theme-ui/color'
 
 const wapperStyle = maximize => {
   if (maximize) {
@@ -13,7 +14,7 @@ const wapperStyle = maximize => {
       left: "0px",
       width: "100vw",
       height: "100vh",
-      background: 'background',
+      background: invert('background'),
     }
   } else {
     return {
@@ -22,7 +23,7 @@ const wapperStyle = maximize => {
       pt: "calc(100% * 9/16)",
       overflow: "hidden",
       position: "relative",
-      background: 'background',
+      background: invert('background'),
     }
   }
 }
@@ -63,17 +64,27 @@ const FullScreen = () => {
   )
 }
 
-const SlideWapper = ({ maximize, children }) => {
-  return (
-    <div sx={wapperStyle(maximize)}>
-      <div sx={{width: '100%', height: '100%', position: 'absolute', top: '0px', left: '0px'}}>
-        <FullScreen/>
-        <Zoom zoom={maximize ? 1 : 9 / 16}>
-          <React.Fragment children={children} />
-        </Zoom>
+const SlideWapper = ({ children }) => {
+  const { maximize, mode } = useDeck();
+  if (maximize || mode != modes.grid) {
+    return (
+      <div sx={wapperStyle(maximize)}>
+        <div sx={{width: '100%', height: '100%', position: 'absolute', top: '0px', left: '0px', overflow: 'auto'}}>
+          <FullScreen/>
+          <Zoom zoom={maximize ? 1 : 9 / 16}>
+            <React.Fragment children={children} />
+          </Zoom>
+        </div>
       </div>
-    </div>
-  )
+    )
+  } else {
+    return (
+      <div sx={{background: invert('background')}}>
+        <React.Fragment children={children} />
+      </div>
+    )
+  }
+
 }
 
 export default SlideWapper

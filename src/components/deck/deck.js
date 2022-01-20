@@ -143,7 +143,7 @@ export default ({
           />
           <Keyboard />
           <Storage />
-          <SlideWapper maximize={ maximize }>
+          <SlideWapper>
             <Wrapper>
               <Mode slides={slides}>
                 <Router
