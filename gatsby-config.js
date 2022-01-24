@@ -45,7 +45,7 @@ module.exports = {
           {
             resolve: `gatsby-remark-drawio`,
             options: {
-              src: "/lib/viewer.min.js",
+              src: "https://viewer.diagrams.net/js/viewer.min.js",
               highlight: "#00afff", 
               lightbox: false,
               nav: true,
