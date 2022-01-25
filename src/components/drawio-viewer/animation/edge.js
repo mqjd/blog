@@ -1,12 +1,17 @@
-import { getDuration, getEdgePath, cloneEdge, arrayRemove } from "./util"
+import { getEdgePath, cloneEdge, arrayRemove } from "./util"
+import { getCellConfig, getCellStyle } from "./config"
+import { mix } from "polished"
 
 export default class EdgeAnimation {
   constructor(edge, graph) {
     this.graph = graph
     this.edge = edge
-    this.duration = getDuration(this.edge.source)
+    this.duration = getCellConfig(this.edge.source)["duration"] || 1000
     this.fromGeometry = this.edge.source.geometry.clone()
     this.toGeometry = this.edge.target.geometry.clone()
+    this.fromFillColor = getCellStyle(this.edge.source)["fillColor"]
+    this.toFillColor = getCellStyle(this.edge.target)["fillColor"]
+    this.isAnimateFillColor = this.animatefillColor()
     this.widthDiff = this.toGeometry.width - this.fromGeometry.width
     this.heightDiff = this.toGeometry.height - this.fromGeometry.height
     this.animationEdge = null
@@ -16,9 +21,14 @@ export default class EdgeAnimation {
     this.finished = false
     this.animationLayer = null
   }
-
+  clone() {
+    return new EdgeAnimation(this.edge, this.graph)
+  }
   isEnd() {
-    return this.finished && this.edgeAnimitions.length == 0
+    return this.finished && this.edgeAnimitions.length === 0
+  }
+  animatefillColor() {
+    return this.fromFillColor && this.toFillColor && this.fromFillColor !== this.toFillColor
   }
   init(animationLayer) {
     this.end = false
@@ -37,7 +47,7 @@ export default class EdgeAnimation {
   finish() {
     this.graph.getModel().setGeometry(this.animationCell, this.toGeometry)
     let nextEdges = this.edge.target.edges.filter(
-      v => v.source == this.edge.target
+      v => v.source === this.edge.target
     )
     if (nextEdges) {
       this.edgeAnimitions = nextEdges.map(
@@ -82,5 +92,14 @@ export default class EdgeAnimation {
     geometry.x = x - geometry.width / 2
     geometry.y = y - geometry.height / 2
     this.graph.getModel().setGeometry(this.animationCell, geometry)
+    if (this.isAnimateFillColor) {
+      let style = this.animationCell.getStyle()
+      style = window.mxUtils.setStyle(
+        style,
+        "fillColor",
+        mix(step, this.toFillColor, this.fromFillColor)
+      )
+      this.graph.getModel().setStyle(this.animationCell, style)
+    }
   }
 }

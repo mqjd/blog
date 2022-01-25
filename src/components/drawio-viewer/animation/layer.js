@@ -1,4 +1,5 @@
-import { arrayRemove, getStyles, batch } from "./util"
+import { arrayRemove, batch } from "./util"
+import { getCellStyle } from "./config"
 import CellAnimation from "./cell"
 
 export default class LayerAnimation {
@@ -7,10 +8,13 @@ export default class LayerAnimation {
     this.graph = graph
     this.cellAnimitions = null
   }
+  clone() {
+    return new LayerAnimation(this.layer, this.graph)
+  }
   init(animationLayer) {
     this.cellAnimitions = this.layer.children
       .filter(cell => !this.graph.getModel().isEdge(cell))
-      .filter(cell => !getStyles(cell).hasOwnProperty("dashed"))
+      .filter(cell => !getCellStyle(cell).hasOwnProperty("dashed"))
       .map(cell => new CellAnimation(cell, this.graph))
     batch(() => {
       this.cellAnimitions.forEach(cellAnimition =>
@@ -23,9 +27,9 @@ export default class LayerAnimation {
   }
   process(ts) {
     batch(() => {
-      this.cellAnimitions.forEach(animition => {
-        animition.process(ts)
-        animition.isEnd() && arrayRemove(this.cellAnimitions, animition)
+      this.cellAnimitions.forEach(animation => {
+        animation.process(ts)
+        animation.isEnd() && arrayRemove(this.cellAnimitions, animation)
       })
     }, this.graph)
   }

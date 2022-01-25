@@ -16,10 +16,6 @@ export function batch(func, graph) {
   }
 }
 
-export function getDuration(cell) {
-  return +(getCellConfig(cell)["duration"] || 3000)
-}
-
 export function getEdgePath(edge, graph) {
   let path = graph.view.states.map[edge.mxObjectId].shape.node.children[1]
   // path.setAttribute('visibility', 'hidden');
@@ -38,33 +34,23 @@ export function cloneEdge(edge) {
   return clone
 }
 
-export function getStyles(cell) {
-  var styles = []
-  if (null != cell) {
-    let styleArr = cell.getStyle().split(";")
-    for (let i = 0; i < styleArr.length; i++)
-      styleArr[i].indexOf("=") !== -1 && styles.push(styleArr[i].split("="))
-  }
-  return styles.reduce((total, item) => {
-    total[item[0]] = item[1]
-    return total
-  }, {})
-}
-
 export function getCenter(cell) {
   let { x, y, width, height } = cell.geometry
   return new window.mxPoint(x + width / 2, y + height / 2)
 }
 
-export function getCellConfig(cell) {
-  if (!cell.value) {
-    return {}
+export function timeFormat(timeStr) {
+  var o = {
+    ms: 1, //毫秒
+    m: 60000, //分钟
+    s: 1000, //秒
   }
-  return cell
-    .getValue()
-    .getAttributeNames()
-    .reduce((total, item) => {
-      total[item] = cell.getAttribute(item)
-      return total
-    }, {})
+
+  for (var k in o) {
+    let match = new RegExp(`^(\\d+)${k}$`, "i").exec(timeStr)
+    if (match) {
+      return +match[1] * o[k]
+    }
+  }
+  return null
 }
